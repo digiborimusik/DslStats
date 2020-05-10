@@ -1,0 +1,61 @@
+adsl: ADSL driver and PHY status
+Status: Showtime
+Retrain Reason: 8000
+Last initialization procedure status:   0
+Max:    Upstream rate = 1281 Kbps, Downstream rate = 26804 Kbps
+Bearer: 0, Upstream rate = 1021 Kbps, Downstream rate = 12284 Kbps
+
+Link Power State:       L0
+Mode:                   ADSL2+
+TPS-TC:                 ATM Mode
+Trellis:                U:ON /D:ON
+Line Status:            No Defect
+Training Status:        Showtime
+                Down            Up
+SNR (dB):        18.6            16.0
+Attn(dB):        15.5            8.7
+Pwr(dBm):        17.5            12.3
+
+                        ADSL2 framing
+                        Bearer 0
+MSGc:           93              13
+B:              24              13
+M:              1               16
+T:              10              8
+R:              16              16
+S:              0.0649          6.9565
+L:              5057            276
+D:              384             8
+
+                        Counters
+                        Bearer 0
+SF:             3373            3214
+SFErr:          0               0
+RS:             3337820         30530
+RSCorr:         0               6
+RSUnCorr:       0               0
+
+                        Bearer 0
+HEC:            0               0
+OCD:            0               0
+LCD:            0               0
+Total Cells:    1569016         123161
+Data Cells:     44              26
+Drop Cells:     0
+Bit Errors:     0               0
+
+ES:             0               0
+SES:            0               0
+UAS:            40              40
+AS:             54
+
+                        Bearer 0
+INP:            4.50            1.50
+INPRein:                0               0
+delay:          6               13
+PER:            16.05           16.52
+OR:             49.33           9.20
+
+Bitswap:        0/0             0/0
+
+#
