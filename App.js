@@ -1,93 +1,91 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button, TouchableOpacity } from 'react-native';
+import { Picker } from '@react-native-community/picker';
+import palette from './modules/colorPalette';
+// import telnetcl from './telnetCl';
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+const App = () => {
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  const [someText, setSomeText] = useState('Hi there!');
+  const [selectedValue, setSelectedValue] = useState("Dlink2640u");
+  const [resultText, setResultText] = useState('Hi there!');
+  
 
-import telnetcl from './telnetCl';
-
-// class Part extends React.Component{
-//   constructor(props){
-//     this.state = {name:'Hardbass'}
-//   }
-
-
-//   render() {
-//     return <Text>Me + {this.state.name}</Text>
-//   }
-// }
-
-
-
-const App: () => React$Node = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <Text>Hello</Text>
-        {/* <Part /> */}
+      <StatusBar barStyle="light-content" />
+      <SafeAreaView style={[styles.fullFlex, styles.mainBackgroundColor]}>
+        <View style={styles.controlBar}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Start</Text>
+          </TouchableOpacity>
+          <Picker
+            selectedValue={selectedValue}
+            style={styles.picker}
+            mode='dropdown'
+            label="blue"
+            itemStyle={{ backgroundColor: 'lightgrey', marginLeft: 0, paddingLeft: 15 }}
+            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+          >
+            <Picker.Item label="Dlink2640u" value="Dlink2640u" />
+            <Picker.Item label="MiNano" value="MiNano" />
+          </Picker>
+        </View>
+        <View style={styles.resultArea}>
+          <ScrollView >
+            <Text style={styles.resultAreaText}>
+              {resultText}
+            </Text>
+          </ScrollView>
+        </View>
       </SafeAreaView>
     </>
   );
 };
 
+
+
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  fullFlex: {
+    flex: 1
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  mainBackgroundColor: {
+    backgroundColor: palette.babyPowder
   },
-  body: {
-    backgroundColor: Colors.white,
+  controlBar: {
+    backgroundColor: palette.richBlack,
+    flexDirection: 'row',
+    height: 40,
+    alignContent: "center",
+    alignItems: "center"
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  picker: {
+    width: 150,
+    height: 40,
+    color: palette.pacificBlue
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
+  button: {
+    backgroundColor: palette.minionYellow,
+    width: 100,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: 50
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
+  buttonText: {
+    fontSize: 16,
+    fontWeight: "bold"
   },
-  highlight: {
-    fontWeight: '700',
+  resultArea: {
+    backgroundColor: palette.babyPowder,
+    color: palette.fluorescentBlue,
+    height: 400,
+    padding: 20
+
   },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+  resultAreaText: {
+    fontSize: 10
+  }
 });
 
 export default App;
