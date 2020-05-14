@@ -1,22 +1,35 @@
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-community/picker';
-import palette from './modules/colorPalette';
-// import telnetcl from './telnetCl';
+import palette from './src/modules/colorPalette';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { add_something } from './src/redux/actions';
+// import tlnt from './src/modules/tlnt';
 
 const App = () => {
 
   const [someText, setSomeText] = useState('Hi there!');
   const [selectedValue, setSelectedValue] = useState("Dlink2640u");
   const [resultText, setResultText] = useState('Hi there!');
-  
+
+
+  const someshit = useSelector(state => state.testReducer.someshitList);
+  const dispatch = useDispatch();
+  console.log(someshit)
+
+  // const stats = tlnt;
+  // console.log(tlnt)
+  // stats.getStats().then(a => console.log(a)).catch(err => console.log(err))
 
   return (
     <>
       <StatusBar barStyle="light-content" />
       <SafeAreaView style={[styles.fullFlex, styles.mainBackgroundColor]}>
         <View style={styles.controlBar}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button}
+            onPress={() => {
+              dispatch(add_something('asd'))
+            }} >
             <Text style={styles.buttonText}>Start</Text>
           </TouchableOpacity>
           <Picker
@@ -34,7 +47,9 @@ const App = () => {
         <View style={styles.resultArea}>
           <ScrollView >
             <Text style={styles.resultAreaText}>
-              {resultText}
+              {someshit.map(el => {
+                return el.name + ' ' + el.key + '\n' 
+              })}
             </Text>
           </ScrollView>
         </View>
@@ -88,4 +103,19 @@ const styles = StyleSheet.create({
   }
 });
 
+
+// const mapStateToProps = (state) => {
+//   console.log(state);
+//   return {
+//     someshit: state.testReducer.someshitList
+//   }
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     add: (data) => dispatch(add_something(data))
+//   }
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
 export default App;

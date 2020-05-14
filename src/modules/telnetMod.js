@@ -1,7 +1,7 @@
 'use strict'
 
 const events = require('events')
-const net = require('net')
+const net = require('react-native-tcp')
 const Promise = require('bluebird')
 // const Duplex = require('stream').Duplex
 const utils = require('./utils')

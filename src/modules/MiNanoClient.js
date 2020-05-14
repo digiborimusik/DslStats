@@ -6,8 +6,8 @@ module.exports = class MiNanoClient extends Client {
             this.connect()
                 .then(() => { return this.exec('help') })
                 .then((response) => {
-                    resolve(response)
                     this.close()
+                    resolve(response)
                 })
                 .catch(err => { reject(err) })
         })
