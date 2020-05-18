@@ -15,7 +15,7 @@ module.exports = class Client {
             this.connection.connect({
                 host: this.ip,
                 port: 23,
-                timeout: 100,
+                timeout: 1000,
                 username: this.login,
                 password: this.password
                 // removeEcho: 4
@@ -42,8 +42,8 @@ module.exports = class Client {
         })
     }
     close() {
-        // this.connection.end()
-        this.connection.destroy()
+        this.connection.end()
+        // this.connection.destroy()
     }
 }
 

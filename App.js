@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button, To
 import { Picker } from '@react-native-community/picker';
 import palette from './src/modules/colorPalette';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { add_something } from './src/redux/actions';
+import { add_something , telnet_request } from './src/redux/actions';
 // import tlnt from './src/modules/tlnt';
 
 const App = () => {
@@ -15,11 +15,8 @@ const App = () => {
 
   const someshit = useSelector(state => state.testReducer.someshitList);
   const dispatch = useDispatch();
-  console.log(someshit)
-
-  // const stats = tlnt;
-  // console.log(tlnt)
-  // stats.getStats().then(a => console.log(a)).catch(err => console.log(err))
+  console.log('LATEST',someshit[someshit.length - 1])
+  let interval;
 
   return (
     <>
@@ -28,10 +25,26 @@ const App = () => {
         <View style={styles.controlBar}>
           <TouchableOpacity style={styles.button}
             onPress={() => {
-              dispatch(add_something('asd'))
+              if(!this.interval){
+                this.interval = setInterval(() => {
+                  dispatch(telnet_request('monoyjin'))
+                }, 250);
+              }
+              
             }} >
             <Text style={styles.buttonText}>Start</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button}
+            onPress={() => {
+
+              clearInterval(this.interval);
+              this.interval = null
+            }} >
+            <Text style={styles.buttonText}>Stop</Text>
+          </TouchableOpacity>
+
+
           <Picker
             selectedValue={selectedValue}
             style={styles.picker}
@@ -45,11 +58,21 @@ const App = () => {
           </Picker>
         </View>
         <View style={styles.resultArea}>
-          <ScrollView >
+          <ScrollView 
+          ref={ref => {this.scrollView = ref}}
+          onContentSizeChange={() => this.scrollView.scrollToEnd({animated: true})}
+          >
             <Text style={styles.resultAreaText}>
-              {someshit.map(el => {
-                return el.name + ' ' + el.key + '\n' 
-              })}
+              {/* {someshit.map(el => {
+                return el.name.status + '\n' + JSON.stringify(el.name.stats) + '\n' + el.name.raw + ' ' + el.key + '\n' + el.name.counter + '\n'
+              })} */}
+              {someshit.length ? (
+                someshit[someshit.length - 1].name.status + '\n' +
+                JSON.stringify(someshit[someshit.length - 1].name.stats) + '\n' +
+                someshit[someshit.length - 1].key+ '\n' +
+                someshit[someshit.length - 1].name.counter + '\n'
+              ) : ''}
+
             </Text>
           </ScrollView>
         </View>
