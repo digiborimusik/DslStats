@@ -6,3 +6,8 @@ export const DELETE_SOMETHING = "DELETE_SOMETHING";
 export const TELNET_REQUEST = "TELNET_REQUEST";
 export const TELNET_REQUEST_SUCCEED = "TELNET_REQUEST_SUCCEED";
 export const TELNET_REQUEST_FAILED = "TELNET_REQUEST_FAILED";
+
+export const RUN = "RUN";
+export const STOP = "STOP";
+
+export const SET_CLIENT = "SET_CLIENT";

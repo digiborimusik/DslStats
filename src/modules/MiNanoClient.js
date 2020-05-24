@@ -16,6 +16,8 @@ module.exports = class MiNanoClient extends Client {
     }
     parse(data) {
         
-        return data
+        const raw = data;
+        const status = 'Yeas';
+        return {raw,status,stats:null}
     }
 }

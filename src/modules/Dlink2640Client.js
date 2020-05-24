@@ -21,8 +21,18 @@ module.exports = class Dlink2640Client extends Client {
             return e.split(/ +/)
         })
     
-    
-        let status = arr[1][1]
+        let status;
+
+        if (arr[1]) {
+            if (arr[1][1]) {
+                status = arr[1][1]
+            } else {
+                status = 'unnown'
+            }
+        } else {
+            status = 'unnown'
+        }
+
         let stats = {}
     
         if(status == 'Showtime'){
@@ -45,6 +55,6 @@ module.exports = class Dlink2640Client extends Client {
     
     
     
-        return {raw,arr,status,stats}
+        return {raw,status,stats}
     }
 }

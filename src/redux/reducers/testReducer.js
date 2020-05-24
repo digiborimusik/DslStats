@@ -1,37 +1,51 @@
-import { ADD_SOMETHING, MODIFY_SOMETHING , DELETE_SOMETHING , TELNET_REQUEST , TELNET_REQUEST_SUCCEED , TELNET_REQUEST_FAILED } from '../actionTypes';
+import { ADD_SOMETHING, MODIFY_SOMETHING, DELETE_SOMETHING, TELNET_REQUEST, TELNET_REQUEST_SUCCEED, TELNET_REQUEST_FAILED, RUN, STOP, SET_CLIENT } from '../actionTypes';
 import tlnt from '../../modules/tlnt';
 const stats = tlnt;
-  
+
 
 const initialState = {
-  someshitList: []
+  someshitList: [],
+  status: { isRun: false },
+  options: { client: 'Dlink2640u' }
+
 }
 
 const testReducer = (state = initialState, action) => {
   console.log('reducer', action)
   switch (action.type) {
-    case ADD_SOMETHING:
-        if(!stats.getPending()){
-          stats.getStats()
-          .then(a => {console.log(a)}).catch(err => console.log(err))
-        } else {
-          console.log('prending')
-        }
-        
+    case RUN:
+      return {
+        ...state,
+        status: { isRun: true }
+      }
+
+    case STOP:
+      return {
+        ...state,
+        status: { isRun: false }
+      }
+
+    case SET_CLIENT:
+      return {
+        ...state,
+        options: { client: action.data }
+      }
+
+    case TELNET_REQUEST_SUCCEED:
       return {
         ...state,
         someshitList: state.someshitList.concat({
           key: Math.random(),
-          name: action.data
+          data: action.data
         })
       };
 
-      case TELNET_REQUEST_SUCCEED: 
+    case TELNET_REQUEST_FAILED:
       return {
         ...state,
         someshitList: state.someshitList.concat({
           key: Math.random(),
-          name: action.data
+          data: action.data
         })
       };
 

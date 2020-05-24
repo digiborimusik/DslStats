@@ -1,22 +1,5 @@
-import { ADD_SOMETHING, MODIFY_SOMETHING , DELETE_SOMETHING , TELNET_REQUEST , TELNET_REQUEST_SUCCEED , TELNET_REQUEST_FAILED } from './actionTypes';
+import { ADD_SOMETHING, MODIFY_SOMETHING , DELETE_SOMETHING , TELNET_REQUEST , TELNET_REQUEST_SUCCEED , TELNET_REQUEST_FAILED , RUN , STOP , SET_CLIENT} from './actionTypes';
 
-
-
-
-export const add_something = (data) => (
-    {
-        type: ADD_SOMETHING,
-        data: data
-    }
-)
-
-export const modify_something = (key,data) => (
-    {
-        type: MODIFY_SOMETHING,
-        key:key,
-        data: data
-    }
-)
 
 export const delete_something = (key) => (
     {
@@ -25,6 +8,25 @@ export const delete_something = (key) => (
     }
 )
 
+
+export const run = () => (
+    {
+        type: RUN
+    }
+)
+
+export const stop = () => (
+    {
+        type: STOP
+    }
+)
+
+export const set_client = (data) => (
+    {
+        type: SET_CLIENT,
+        data: data
+    }
+)
 
 
 export const telnet_request = (data) => (
@@ -47,3 +49,4 @@ export const telnet_request_failed = (data) => (
         data: data
     }
 )
+
