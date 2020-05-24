@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button, TouchableOpacity } from 'react-native';
-import { Picker } from '@react-native-community/picker';
 import palette from './src/modules/colorPalette';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { add_something, telnet_request } from './src/redux/actions';
 
-import {ControlBar} from './src/controlBar';
+import {ControlBar} from './src/ControlBar';
 
 const App = () => {
 
