@@ -14,7 +14,7 @@ export const TheButton = (prop) => {
         <TouchableHighlight style={[styles.button, prop.active ? styles.activeButton : null]}
             disabled={prop.disabled}
             onPress={prop.action}
-            underlayColor={palette.richBlack} >
+            underlayColor={palette.minionYellow} >
 
             <Text style={styles.buttonText}>{prop.label}</Text>
         </TouchableHighlight>
@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderRadius: 3,
         shadowOffset: { width: 10, height: 10 },
-  shadowColor: 'blue',
-  shadowOpacity: 0.5,
-  elevation: 10,
+        shadowColor: 'blue',
+        shadowOpacity: 0.5,
+        elevation: 10,
     },
     activeButton: {
         backgroundColor: palette.minionYellow

@@ -7,8 +7,12 @@ import { IntervalDispatcher } from './IntervalDispatcher';
 import { ModalSettings } from './ModalSettings';
 import { TheButton } from './TheButton';
 
+import {NumericInput} from './NumericInput';
+import {ClientPicker} from './ClientPicker';
+
 import RNPickerSelect from 'react-native-picker-select';
 import { Chevron } from 'react-native-shapes';
+
 
 
 
@@ -29,32 +33,9 @@ export const ControlBar = (a) => {
             <TheButton label='STOP' active={!status} action={() => { dispatch(stop()) }} />
             {status ? <IntervalDispatcher client={client} ms={intervalValue} /> : null}
 
-            {/* <Picker
-                selectedValue={client}
-                style={styles.picker}
-                textStyle={{fontSize: 12,color:'yellow'}}
-                mode={('dropdown')}
-                enabled={!status}
-                onValueChange={(itemValue) => dispatch(set_client(itemValue))}
-            >
-
-                <Picker.Item label="MiNano" value={'MiNano'} />
-                <Picker.Item label="Dlink2640u" value={'Dlink2640u'} />
-
-            </Picker>
-
-            <Picker style={styles.picker}>
-                <Picker.Item label="1sec" value={'MiNano'} />
-                <Picker.Item label="2sec" value={'Dlink2640u'} />
-            </Picker> */}
-
-
             <View style={{ marginLeft: 'auto' }}></View>
-
-            <RNPickerSelect
-            Icon={() => {
-                return <Chevron size={1.5} color="gray" />;
-              }}
+            
+            {/* <RNPickerSelect
                 disabled={status}
                 placeholder={{}}
                 InputAccessoryView={() => null}
@@ -62,12 +43,10 @@ export const ControlBar = (a) => {
                     inputAndroid: {
                         backgroundColor: 'transparent',
                         color: 'black',
-                        width: 120
-                    },
-                    iconContainer: {
-                        top: 5,
-                        right: 15,
-
+                        margin:0,
+                        padding:0,
+                        width: 100,
+                        height:40
                     }
                 }}
                 onValueChange={(itemValue) => dispatch(set_client(itemValue))}
@@ -77,7 +56,12 @@ export const ControlBar = (a) => {
                     { label: 'MiNano', value: 'MiNano' },
                     { label: 'Dlink2640u', value: 'Dlink2640u' }
                 ]}
-            />
+            /> */}
+
+            <ClientPicker />
+            
+            <NumericInput />
+
 
             <TheButton label='SETTINGS' disabled={status} action={() => { setShowDialog(true) }} />
             <Modal
@@ -121,10 +105,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5
-    },
-    modalText: {
-        marginBottom: 15,
-        textAlign: "center"
     },
     controlBar: {
         height: '100%',

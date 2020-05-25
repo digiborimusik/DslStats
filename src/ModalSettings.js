@@ -17,8 +17,7 @@ export const ModalSettings = (prop) => {
 
     return (
         <>
-            <Text style={[styles.marginBotm]} >Settings</Text>
-            {/* <Text>Authentification</Text> */}
+            <Text style={{...styles.marginBotm,fontWeight:'bold',}} >Settings</Text>
             <View style={[styles.container, styles.marginBotm]}>
                 <Text style={styles.inputLabel}>Login</Text>
                 <TextInput

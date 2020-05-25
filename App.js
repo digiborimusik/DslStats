@@ -14,7 +14,7 @@ const App = () => {
 
 	return (
 		<>
-			<StatusBar barStyle="light-content" />
+			<StatusBar barStyle="light-content" backgroundColor={palette.richBlack} />
 			<SafeAreaView style={[styles.safeArea]}>
 				<View style={[styles.contentSubArea]}></View>
 				<View style={[styles.controlSubArea]}>

@@ -11,3 +11,4 @@ export const RUN = "RUN";
 export const STOP = "STOP";
 
 export const SET_CLIENT = "SET_CLIENT";
+export const SET_INTERVAL = "SET_INTERVAL";

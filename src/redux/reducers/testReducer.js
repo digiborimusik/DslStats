@@ -1,4 +1,4 @@
-import { ADD_SOMETHING, MODIFY_SOMETHING, DELETE_SOMETHING, TELNET_REQUEST, TELNET_REQUEST_SUCCEED, TELNET_REQUEST_FAILED, RUN, STOP, SET_CLIENT } from '../actionTypes';
+import { ADD_SOMETHING, MODIFY_SOMETHING, DELETE_SOMETHING, TELNET_REQUEST, TELNET_REQUEST_SUCCEED, TELNET_REQUEST_FAILED, RUN, STOP, SET_CLIENT , SET_INTERVAL } from '../actionTypes';
 import tlnt from '../../modules/tlnt';
 const stats = tlnt;
 
@@ -6,7 +6,7 @@ const stats = tlnt;
 const initialState = {
   someshitList: [],
   status: { isRun: false },
-  options: { client: 'Dlink2640u' }
+  options: { client: 'Dlink2640u', interval: 1 }
 
 }
 
@@ -28,7 +28,12 @@ const testReducer = (state = initialState, action) => {
     case SET_CLIENT:
       return {
         ...state,
-        options: { client: action.data }
+        options: {...state.options, client: action.data }
+      }
+    case SET_INTERVAL:
+      return {
+        ...state,
+        options: {...state.options, interval: action.data }
       }
 
     case TELNET_REQUEST_SUCCEED:
