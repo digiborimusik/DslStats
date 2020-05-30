@@ -13,9 +13,14 @@ export const IntervalDispatcher = (prop) => {
     const dispatch = useDispatch();
     console.log('RERENDER DESU')
     let client;
+    const ip = useSelector(state => state.testReducer.options.ip);
+    const login = useSelector(state => state.testReducer.options.login);
+    const password = useSelector(state => state.testReducer.options.password);
+    const intervalMs = useSelector(state => state.testReducer.options.interval);
+
     switch (prop.client) {
         case 'Dlink2640u':
-            client = new LineStatsLoader(Dlink2640Client)
+            client = new LineStatsLoader(Dlink2640Client,{ip,login,password})
             break;
         case 'MiNano':
             client = new LineStatsLoader(MiNanoClient)
@@ -27,13 +32,12 @@ export const IntervalDispatcher = (prop) => {
 
     let interval;
 
-    const [counterValue, setCounterValue] = useState(0);
+    const [counterValue, setCounterValue] = useState(1);
 
     tickHandler = () => {
-        setCounterValue(counterValue + 1)
+        // setCounterValue(counterValue + 1)
         client.getStats()
         .then(a => {
-            // console.log(a)
             dispatch(telnet_request_succed({ ...a, ...{ counter: counterValue, date: new Date() } }))
         })
         .catch(e => {
@@ -43,9 +47,10 @@ export const IntervalDispatcher = (prop) => {
 
     useEffect(() => {
         interval = setInterval(() => {
+            setCounterValue(counterValue + 1)
             console.log('tick')
             tickHandler()
-        }, prop.ms);
+        }, intervalMs * 1000);
 
         return function clear() {
             clearInterval(interval)

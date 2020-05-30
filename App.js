@@ -5,6 +5,7 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import { add_something, telnet_request } from './src/redux/actions';
 
 import {ControlBar} from './src/ControlBar';
+import {CurrentDataDisplay} from './src/CurrentDataDisplay';
 
 const App = () => {
 
@@ -16,7 +17,9 @@ const App = () => {
 		<>
 			<StatusBar barStyle="light-content" backgroundColor={palette.richBlack} />
 			<SafeAreaView style={[styles.safeArea]}>
-				<View style={[styles.contentSubArea]}></View>
+				<View style={[styles.contentSubArea]}>
+					<CurrentDataDisplay />
+				</View>
 				<View style={[styles.controlSubArea]}>
 					<ControlBar />
 				</View>
@@ -33,10 +36,12 @@ const styles = StyleSheet.create({
 		backgroundColor: palette.richBlack
 	},
 	contentSubArea:{
-		flex: 20,
+		flex: 100,
 	},
 	controlSubArea:{
 		flex: 1,
+		// minHeight:60,
+		flexBasis:40,
 		backgroundColor: palette.babyPowder
 	},
 

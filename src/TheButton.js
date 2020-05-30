@@ -11,12 +11,23 @@ import { add_something, telnet_request, run, stop, set_client } from './redux/ac
 export const TheButton = (prop) => {
 
     return (
-        <TouchableHighlight style={[styles.button, prop.active ? styles.activeButton : null]}
+        <TouchableHighlight 
+            style={[
+                styles.button, 
+                prop.active ? styles.activeButton : null,
+                prop.inverted ? styles.invertedColors : null
+            ]}
             disabled={prop.disabled}
             onPress={prop.action}
             underlayColor={palette.minionYellow} >
 
-            <Text style={styles.buttonText}>{prop.label}</Text>
+            <Text 
+                style={[
+                    styles.buttonText,
+                    prop.inverted ? styles.invertedTextColors : null
+                ]}>
+                    {prop.label}
+            </Text>
         </TouchableHighlight>
     )
 }
@@ -43,5 +54,11 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: '100',
         color: palette.babyPowder
+    },
+    invertedColors:{
+        backgroundColor: palette.babyPowder
+    },
+    invertedTextColors:{
+        color: palette.richBlack
     }
 })

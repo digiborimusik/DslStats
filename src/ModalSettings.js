@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button, TouchableOpacity, Modal, TouchableHighlight, TextInput } from 'react-native';
 import palette from './modules/colorPalette';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { add_something, telnet_request, run, stop, set_client } from './redux/actions';
-import { IntervalDispatcher } from './IntervalDispatcher'
+import { set_login , set_password , set_ip } from './redux/actions';
 import { TheButton } from './TheButton'
 
 
 
 export const ModalSettings = (prop) => {
-    const [login, setLogin] = React.useState('admin');
-    const [password, setPassword] = React.useState('admin');
-    const [ip, setIp] = React.useState('192.168.1.1');
 
+    const login = useSelector(state => state.testReducer.options.login);
+    const password = useSelector(state => state.testReducer.options.password);
+    const ip = useSelector(state => state.testReducer.options.ip);
 
+    const dispatch = useDispatch();
 
     return (
         <>
@@ -22,7 +22,7 @@ export const ModalSettings = (prop) => {
                 <Text style={styles.inputLabel}>Login</Text>
                 <TextInput
                     style={styles.textInp}
-                    onChangeText={text => setLogin(text)}
+                    onChangeText={text => dispatch(set_login(text))}
                     value={login}
                 >
                 </TextInput>
@@ -32,7 +32,7 @@ export const ModalSettings = (prop) => {
             <Text style={styles.inputLabel}>Password</Text>
                 <TextInput
                     style={styles.textInp}
-                    onChangeText={text => setPassword(text)}
+                    onChangeText={text => dispatch(set_password(text))}
                     value={password}
                 >
 
@@ -43,13 +43,13 @@ export const ModalSettings = (prop) => {
                 <Text style={styles.inputLabel}>IP Adress</Text>
                 <TextInput
                     style={styles.textInp}
-                    onChangeText={text => setIp(text)}
+                    onChangeText={text => dispatch(set_ip(text))}
                     value={ip}
                 >
                 </TextInput>
             </View>
 
-            <TheButton label='Save' action={prop.closeBtn} />
+            <TheButton label='Close' action={prop.closeBtn} />
         </>
     )
 
