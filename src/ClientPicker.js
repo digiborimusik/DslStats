@@ -25,7 +25,7 @@ export const ClientPicker = () => {
                 onPress={() => { setShowDialog(true) }}
                 underlayColor={palette.fluorescentBlue}
             >
-                <View style={styles.container} >
+                <View style={[styles.container,status ? {opacity:0.25} : null]} >
                     <Text>
                         {client}
                     </Text>

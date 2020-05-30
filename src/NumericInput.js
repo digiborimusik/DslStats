@@ -14,7 +14,7 @@ export const NumericInput = (prop) => {
 
     return (
         <>
-        <View style={[styles.wrapper]}>
+        <View style={[styles.wrapper,status ? {opacity:0.25} : null]}>
             <TouchableHighlight 
                 disabled={status}
                 style={[styles.parts]}

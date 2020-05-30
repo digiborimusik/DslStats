@@ -5,7 +5,7 @@ const stats = tlnt;
 
 const initialState = {
   someshitList: [],
-  status: { isRun: false },
+  status: { isRun: false , date:null },
   options: { client: 'Dlink2640u', interval: 1, login: 'admin', password: 'admin', ip: '192.168.1.1' }
 
 }
@@ -16,7 +16,7 @@ const testReducer = (state = initialState, action) => {
     case RUN:
       return {
         ...state,
-        status: { isRun: true }
+        status: { isRun: true , date: new Date() }
       }
 
     case STOP:

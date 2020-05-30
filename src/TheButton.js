@@ -15,7 +15,8 @@ export const TheButton = (prop) => {
             style={[
                 styles.button, 
                 prop.active ? styles.activeButton : null,
-                prop.inverted ? styles.invertedColors : null
+                prop.inverted ? styles.invertedColors : null,
+                prop.disabled ? {backgroundColor: palette.pacificBlue} : null
             ]}
             disabled={prop.disabled}
             onPress={prop.action}

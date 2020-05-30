@@ -20,12 +20,11 @@ export const RawDataDisplay = (prop) => {
         return (
             <Text style={styles.resultAreaText}>
                 {
+                    prop.item.data.counter + '\n' +
+                    prop.item.data.date + '\n' +
                     prop.item.data.status + '\n' +
                     prop.item.data.raw + '\n' +
-                    JSON.stringify(prop.item.data.stats) + '\n' +
-                    prop.item.key + '\n' +
-                    prop.item.data.counter + '\n' +
-                    prop.item.data.date + '\n'
+                    JSON.stringify(prop.item.data.stats) + '\n'
                 }
             </Text>
         )
@@ -33,13 +32,7 @@ export const RawDataDisplay = (prop) => {
 
     return (
         <>
-            <View style={styles.container}>
-                <TouchableOpacity
-                    onPress={onPressHandler}
-                    underlayColor={palette.minionYellow} >
-                    {someshit.length ? <ItemRender item={someshit[0]} /> : <Text>Nothin</Text>}
-                </TouchableOpacity>
-            </View>
+            
 
             
             <Modal animationType="slide" transparent={true} visible={showModal}>
@@ -49,6 +42,9 @@ export const RawDataDisplay = (prop) => {
                         <FlatList
                             data={someshit}
                             renderItem={({ item }) => <ItemRender item={item} />}
+                            ItemSeparatorComponent={() => {
+                               return <View style={{width:'100%',height:1,margin:12,backgroundColor:palette.richBlack}}></View>
+                            }}
                             keyExtractor={item => item.key.toString()}
                         />
 
@@ -58,6 +54,13 @@ export const RawDataDisplay = (prop) => {
                     </View>
                 </View>
             </Modal>
+            <View style={styles.container}>
+                <TouchableOpacity
+                    onPress={onPressHandler}
+                    underlayColor={palette.minionYellow} >
+                    {someshit.length ? <ItemRender item={someshit[0]} /> : <Text>Nothin</Text>}
+                </TouchableOpacity>
+            </View>
         </>
     )
 }
@@ -65,7 +68,8 @@ export const RawDataDisplay = (prop) => {
 
 const styles = StyleSheet.create({
     container: {
-        // backgroundColor: palette.fluorescentBlue
+        backgroundColor: palette.richBlack,
+        padding:12
 
     },
     centeredView: {
@@ -75,8 +79,8 @@ const styles = StyleSheet.create({
         marginTop: 22
     },
     modalView: {
-        margin: 20,
-        backgroundColor: palette.richBlack,
+        marginBottom: 20,
+        backgroundColor: palette.pacificBlue,
         borderRadius: 20,
         padding: 20,
         alignItems: "center",
