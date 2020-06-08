@@ -38,9 +38,9 @@ module.exports = class Dlink2640Client extends Client {
         // stats = {
         //     maxUpSpd:'2455',maxDwSpd:'12412',
         //     UpSpd:'1445',DwSpd:'10200',
-        //     snrd:'12.5',snru:'9.1',
+        //     snrd:Math.round((Math.random() * 5 + 9)),snru:Math.round((Math.random() * 5 + 9)),
         //     attnd:'50',attnu:'34',
-        //     rsCorrD:'9521',rsCorrU:'65',
+        //     rsCorrD:Math.round((Math.random() * 10)),rsCorrU:Math.round((Math.random() * 2)),
         //     rsUncorrD:'99',rsUncorrU:'52'
         // }
 

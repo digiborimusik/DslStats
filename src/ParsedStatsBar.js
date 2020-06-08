@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, Modal, FlatList } from 'react
 import palette from './modules/colorPalette';
 
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { show_raw } from './redux/actions';
+import { show_raw, show_charts } from './redux/actions';
 
 import { TheButton } from './TheButton'
 
@@ -17,19 +17,19 @@ export const ParsedStatsBar = (prop) => {
     const dispatch = useDispatch();
 
     const showRaw = useSelector(state => state.testReducer.viewParameters.showRaw);
-
+    const showCharts = useSelector(state => state.testReducer.viewParameters.showCharts);
 
     return (
         <>
 
             <View style={{ padding: 4 }}>
-                
+
                 <Text style={{ color: palette.babyPowder }}>xDsl status: {data ? data.status : '---'} </Text>
                 <Text style={{ color: palette.babyPowder }}>Mode: {stats ? stats.mode : '---'}</Text>
                 <Text style={{ color: palette.babyPowder }}>Sample number: {data ? data.counter : '---'}</Text>
                 <Text style={{ color: palette.babyPowder }}>Last sync: {data ? data.date.toString().substr(0, 25) : '---'}</Text>
             </View>
-            
+
             <View style={styles.container}>
                 <View style={styles.sides}>
                     <Text style={styles.sideHeading}>Downlink</Text>
@@ -87,16 +87,20 @@ export const ParsedStatsBar = (prop) => {
                 </View>
             </View>
             <View style={styles.buttons} >
-                    <TouchableOpacity onPress={() => {dispatch(show_raw())}} >
-                        <Text style={[styles.toggler, showRaw ? styles.togglerActive : null]} >RAW</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={[styles.toggler, showSNR ? styles.togglerActive : null]} >SNR</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={[styles.toggler, showLog ? styles.togglerActive : null]} >LOG</Text>
-                    </TouchableOpacity>
-                </View>
+                <TouchableOpacity onPress={() => { dispatch(show_charts()) }} >
+                    <Text style={[styles.toggler, showCharts ? styles.togglerActive : null]} >CHARTS</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => { dispatch(show_raw()) }} >
+                    <Text style={[styles.toggler, showRaw ? styles.togglerActive : null]} >RAW</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity>
+                    <Text style={[styles.toggler, showSNR ? styles.togglerActive : null]} >SNR</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Text style={[styles.toggler, showLog ? styles.togglerActive : null]} >LOG</Text>
+                </TouchableOpacity>
+            </View>
         </>
     )
 }
