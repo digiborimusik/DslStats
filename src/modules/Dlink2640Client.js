@@ -33,7 +33,17 @@ module.exports = class Dlink2640Client extends Client {
             status = 'unnown'
         }
 
-        let stats = {}
+        let stats = null
+
+        // stats = {
+        //     maxUpSpd:'2455',maxDwSpd:'12412',
+        //     UpSpd:'1445',DwSpd:'10200',
+        //     snrd:'12.5',snru:'9.1',
+        //     attnd:'50',attnu:'34',
+        //     rsCorrD:'9521',rsCorrU:'65',
+        //     rsUncorrD:'99',rsUncorrU:'52'
+        // }
+
     
         if(status == 'Showtime'){
             stats = {

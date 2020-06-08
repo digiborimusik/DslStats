@@ -38,7 +38,7 @@ export const IntervalDispatcher = (prop) => {
         // setCounterValue(counterValue + 1)
         client.getStats()
         .then(a => {
-            dispatch(telnet_request_succed({ ...a, ...{ counter: counterValue, date: new Date() } }))
+            dispatch(telnet_request_succed({ ...a, ...{ counter: counterValue, date: new Date(), rand:Math.round((Math.random() * 100)) } }))
         })
         .catch(e => {
             dispatch(telnet_request_failed({ raw: e, ...{ counter: counterValue, date: new Date() } }))

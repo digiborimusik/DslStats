@@ -5,34 +5,33 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import { add_something, telnet_request } from './redux/actions';
 
 import { RawDataDisplay } from './RawDataDisplay'
+import { ParsedStatsBar } from './ParsedStatsBar'
+import { Victory } from './victory'
 
 export const CurrentDataDisplay = () => {
     const someshit = useSelector(state => state.testReducer.someshitList);
     const status = useSelector(state => state.testReducer.status);
 
+    const showRaw = useSelector(state => state.testReducer.viewParameters.showRaw);
+
     return (
 
         <View>
-            <View style={styles.topBar}>
+            <View style={[styles.topBar, status.isRun ? {backgroundColor:palette.minionYellow} : null]}>
                 <Text style={styles.topBarText}>{status.isRun ? 'Sampling started' : 'Sampling idle'}</Text>
                 <Text style={styles.topBarText}>{status.isRun ? status.date.toTimeString() : null}</Text>
             </View>
-            <ScrollView style={styles.container}>
-                <RawDataDisplay someshit={someshit} />
-            </ScrollView>
+            
+            <ParsedStatsBar someshit={someshit} />
+            
+            {showRaw ? <RawDataDisplay someshit={someshit} /> : null }
+            <Victory />
         </View>
 
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        height: 600,
-        // backgroundColor:palette.babyPowder,
-        // borderColor: palette.babyPowder,
-        // borderWidth: 1,
-        // borderRadius: 4,
-    },
     topBar:{
         backgroundColor:palette.babyPowder,
         height:40,
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
     },
     topBarText:{
         color:palette.richBlack,
-        fontWeight:'bold',
+        fontWeight:'100',
         padding:6
     }
 })
