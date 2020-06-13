@@ -35,14 +35,16 @@ module.exports = class Dlink2640Client extends Client {
 
         let stats = null
 
-        // stats = {
-        //     maxUpSpd:'2455',maxDwSpd:'12412',
-        //     UpSpd:'1445',DwSpd:'10200',
-        //     snrd:Math.round((Math.random() * 5 + 9)),snru:Math.round((Math.random() * 5 + 9)),
-        //     attnd:'50',attnu:'34',
-        //     rsCorrD:Math.round((Math.random() * 10)),rsCorrU:Math.round((Math.random() * 2)),
-        //     rsUncorrD:'99',rsUncorrU:'52'
-        // }
+        stats = {
+            maxUpSpd:'2455',maxDwSpd:'12412',
+            UpSpd:'1445',DwSpd:'10200',
+            snrd:Math.round((Math.random() * 3.9 + 9)).toString(),snru:Math.round((Math.random() * 5.3 + 9)).toString(),
+            attnd:'50',attnu:'34',
+            rsCorrD:Math.round((Math.random() * 6.5)).toString(),
+            rsCorrU:Math.round((Math.random() * 7.5)).toString(),
+            rsUncorrD:Math.round((Math.random() * 3.5)).toString(),
+            rsUncorrU:Math.round((Math.random() * 5.5)).toString()
+        }
 
     
         if(status == 'Showtime'){

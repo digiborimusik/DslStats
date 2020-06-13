@@ -27,7 +27,7 @@ export const CurrentDataDisplay = () => {
             
             {showRaw ? <RawDataDisplay someshit={someshit} /> : null }
 
-            {showCharts ? <Charts someshit={someshit} /> : null }
+            {showCharts ? <Charts /> : null }
             
         </View>
 
