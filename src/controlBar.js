@@ -23,6 +23,8 @@ export const ControlBar = (a) => {
     const status = useSelector(state => state.testReducer.status.isRun);
     const client = useSelector(state => state.testReducer.options.client);
 
+    console.log('RERENDER CONTROLBAR')
+
     const dispatch = useDispatch();
 
     console.log(a)
@@ -31,33 +33,10 @@ export const ControlBar = (a) => {
 
             <TheButton label='START' active={status} action={() => { dispatch(run()) }} />
             <TheButton label='STOP' active={!status} action={() => { dispatch(stop()) }} />
-            {status ? <IntervalDispatcher client={client} ms={intervalValue} /> : null}
+            {status ? <IntervalDispatcher client={client} ms={intervalValue} status /> : null}
 
             <View style={{ marginLeft: 'auto' }}></View>
             
-            {/* <RNPickerSelect
-                disabled={status}
-                placeholder={{}}
-                InputAccessoryView={() => null}
-                style={{
-                    inputAndroid: {
-                        backgroundColor: 'transparent',
-                        color: 'black',
-                        margin:0,
-                        padding:0,
-                        width: 100,
-                        height:40
-                    }
-                }}
-                onValueChange={(itemValue) => dispatch(set_client(itemValue))}
-                value={client}
-                useNativeAndroidPickerStyle={false}
-                items={[
-                    { label: 'MiNano', value: 'MiNano' },
-                    { label: 'Dlink2640u', value: 'Dlink2640u' }
-                ]}
-            /> */}
-
             <ClientPicker />
             
             <NumericInput />

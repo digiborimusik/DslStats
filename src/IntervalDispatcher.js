@@ -30,12 +30,12 @@ export const IntervalDispatcher = (prop) => {
             break;
     }
 
+    
+    // const [counterValue, setCounterValue] = useState(1);
     let interval;
-
-    const [counterValue, setCounterValue] = useState(1);
+    let counterValue = 0;
 
     tickHandler = () => {
-        // setCounterValue(counterValue + 1)
         client.getStats()
         .then(a => {
             dispatch(telnet_request_succed({ ...a, ...{ counter: counterValue, date: new Date(), rand:Math.round((Math.random() * 100)) } }))
@@ -43,21 +43,27 @@ export const IntervalDispatcher = (prop) => {
         .catch(e => {
             dispatch(telnet_request_failed({ raw: e, ...{ counter: counterValue, date: new Date() } }))
         })
+        // setCounterValue(counterValue + 1)
+        counterValue += 1;
+
     }
 
     useEffect(() => {
         interval = setInterval(() => {
-            setCounterValue(counterValue + 1)
+            // setCounterValue(counterValue + 1)
             console.log('tick')
             tickHandler()
         }, intervalMs * 1000);
+        dispatch(telnet_request_failed({ raw: 'SEPARATOR', ...{ counter: counterValue, date: new Date() } }))
 
         return function clear() {
             clearInterval(interval)
+            // dispatch(telnet_request_failed({ raw: 'SEPARATOR', ...{ counter: counterValue, date: new Date() } }))
         }
     })
 
     return (
-        <Text>{counterValue}</Text>
+        // <Text>{counterValue}</Text>
+        <Text>run</Text>
     )
 }

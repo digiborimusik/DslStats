@@ -6,14 +6,16 @@ import { add_something, telnet_request } from './redux/actions';
 
 import { RawDataDisplay } from './RawDataDisplay'
 import { ParsedStatsBar } from './ParsedStatsBar'
-import { Charts } from './Charts'
+import { SnrCharts } from './SnrCharts'
 
 export const CurrentDataDisplay = () => {
     const someshit = useSelector(state => state.testReducer.someshitList);
     const status = useSelector(state => state.testReducer.status);
 
     const showRaw = useSelector(state => state.testReducer.viewParameters.showRaw);
-    const showCharts = useSelector(state => state.testReducer.viewParameters.showCharts);
+    const showSnrCharts = useSelector(state => state.testReducer.viewParameters.showSnrCharts);
+    const showAttCharts = useSelector(state => state.testReducer.viewParameters.showAttCharts);
+    const showErrorsCharts = useSelector(state => state.testReducer.viewParameters.showErrorsCharts);
 
     return (
 
@@ -27,7 +29,7 @@ export const CurrentDataDisplay = () => {
             
             {showRaw ? <RawDataDisplay someshit={someshit} /> : null }
 
-            {showCharts ? <Charts /> : null }
+            {showSnrCharts ? <SnrCharts /> : null }
             
         </View>
 

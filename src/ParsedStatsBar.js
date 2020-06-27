@@ -3,21 +3,22 @@ import { StyleSheet, View, Text, TouchableOpacity, Modal, FlatList } from 'react
 import palette from './modules/colorPalette';
 
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { show_raw, show_charts } from './redux/actions';
+import { show_raw, show_snrcharts , show_attcharts , show_errorscharts } from './redux/actions';
 
 import { TheButton } from './TheButton'
 
 export const ParsedStatsBar = (prop) => {
     data = prop.someshit[0] ? prop.someshit[0].data : null;
     stats = prop.someshit[0] ? prop.someshit[0].data.stats : null;
-    // const [showRaw, setShowRaw] = useState(true);
     const [showSNR, setShowSNR] = useState(false);
     const [showLog, setShowLog] = useState(false);
 
     const dispatch = useDispatch();
 
     const showRaw = useSelector(state => state.testReducer.viewParameters.showRaw);
-    const showCharts = useSelector(state => state.testReducer.viewParameters.showCharts);
+    const showSnrCharts = useSelector(state => state.testReducer.viewParameters.showSnrCharts);
+    const showAttCharts = useSelector(state => state.testReducer.viewParameters.showAttCharts);
+    const showErrorsCharts = useSelector(state => state.testReducer.viewParameters.showErrorsCharts);
 
     return (
         <>
@@ -87,18 +88,17 @@ export const ParsedStatsBar = (prop) => {
                 </View>
             </View>
             <View style={styles.buttons} >
-                <TouchableOpacity onPress={() => { dispatch(show_charts()) }} >
-                    <Text style={[styles.toggler, showCharts ? styles.togglerActive : null]} >CHARTS</Text>
-                </TouchableOpacity>
                 <TouchableOpacity onPress={() => { dispatch(show_raw()) }} >
                     <Text style={[styles.toggler, showRaw ? styles.togglerActive : null]} >RAW</Text>
                 </TouchableOpacity>
-
-                <TouchableOpacity>
-                    <Text style={[styles.toggler, showSNR ? styles.togglerActive : null]} >SNR</Text>
+                <TouchableOpacity onPress={() => { dispatch(show_snrcharts()) }} >
+                    <Text style={[styles.toggler, showSnrCharts ? styles.togglerActive : null]} >SNR</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                    <Text style={[styles.toggler, showLog ? styles.togglerActive : null]} >LOG</Text>
+                    <Text style={[styles.toggler, showSNR ? styles.togglerActive : null]} >ATT</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Text style={[styles.toggler, showLog ? styles.togglerActive : null]} >ERRORS</Text>
                 </TouchableOpacity>
             </View>
         </>

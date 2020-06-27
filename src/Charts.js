@@ -9,19 +9,35 @@ export const Charts = (prop) => {
 
     const someshit = useSelector(state => state.testReducer.someshitList);
     const [zoomedXDomain, setZoomedXDomain] = useState(null);
+    const [maxPoints, setMaxPoints] = useState(400);
 
     onDomainChange = (domain) => {
         setZoomedXDomain(domain.x)
     }
 
     getData = () => {
+        
         const data = someshit;
+        let filtered = []
+        
         if (!zoomedXDomain) {
-            return data
+            filtered =  data
+        } else {
+            filtered = data.filter((d) => (d.data.date >= zoomedXDomain[0] && d.data.date <= zoomedXDomain[1]));
         }
-        return data.filter(
-            // is d "between" the ends of the visible x-domain?
-            (d) => (d.data.date >= zoomedXDomain[0] && d.data.date <= zoomedXDomain[1]));
+
+        // const filtered = data.filter((d) => (d.data.date >= zoomedXDomain[0] && d.data.date <= zoomedXDomain[1]));
+
+        if (filtered.length > maxPoints) {
+            console.log('FILTER')
+            const k = Math.ceil(filtered.length / maxPoints);
+            return filtered.filter(
+                (d, i) => ((i % k) === 0)
+            );
+        }
+
+        return filtered
+
     }
 
 
@@ -52,15 +68,16 @@ export const Charts = (prop) => {
                 // domainPadding={{ y: 1 }}
                 containerComponent={<VictoryZoomContainer zoomDimension="x" onZoomDomainChange={onDomainChange} />}
                 minDomain={{ y: 0 }}
-                domain={{ x: [new Date((someshit[0] ? someshit[0].data.date : new Date() ) - 500000),someshit[0] ? someshit[0].data.date : new Date()]}}
+                domain={{ x: [new Date((someshit[0] ? someshit[0].data.date : new Date()) - 500000), someshit[0] ? someshit[0].data.date : new Date()] }}
 
             >
                 <VictoryLine
-                    style={{ data: { stroke: palette.minionYellow  } }}
+                    style={{ data: { stroke: palette.minionYellow } }}
                     data={getData()}
+                    interpolation="natural"
                     x="data.date"
                     y={(data) => {
-                        return data.data.stats ? Number(data.data.stats.snrd) : 0
+                        return data.data.stats ? Number(data.data.stats.snrd) : null
                     }}
                 />
                 {/* <VictoryBar
