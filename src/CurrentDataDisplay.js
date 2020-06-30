@@ -20,33 +20,33 @@ export const CurrentDataDisplay = () => {
     return (
 
         <View>
-            <View style={[styles.topBar, status.isRun ? {backgroundColor:palette.minionYellow} : null]}>
+            <View style={[styles.topBar, status.isRun ? { backgroundColor: palette.minionYellow } : null]}>
                 <Text style={styles.topBarText}>{status.isRun ? 'Sampling started' : 'Sampling idle'}</Text>
                 <Text style={styles.topBarText}>{status.isRun ? status.date.toTimeString() : null}</Text>
             </View>
-            
-            <ParsedStatsBar someshit={someshit} />
-            
-            {showRaw ? <RawDataDisplay someshit={someshit} /> : null }
+            <ScrollView>
+                <ParsedStatsBar someshit={someshit} />
 
-            {showSnrCharts ? <SnrCharts /> : null }
-            
+                {showRaw ? <RawDataDisplay someshit={someshit} /> : null}
+
+                {showSnrCharts ? <SnrCharts /> : null}
+            </ScrollView>
         </View>
 
     )
 }
 
 const styles = StyleSheet.create({
-    topBar:{
-        backgroundColor:palette.babyPowder,
-        height:40,
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center'
+    topBar: {
+        backgroundColor: palette.babyPowder,
+        height: 40,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
-    topBarText:{
-        color:palette.richBlack,
-        fontWeight:'100',
-        padding:6
+    topBarText: {
+        color: palette.richBlack,
+        fontWeight: '100',
+        padding: 6
     }
 })

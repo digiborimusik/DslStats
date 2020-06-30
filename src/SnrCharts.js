@@ -12,90 +12,175 @@ export const SnrCharts = (prop) => {
 
     const someshit = useSelector(state => state.testReducer.someshitList);
 
-    let dataset = someshit.map(item => {
+    let snrd_dataset = someshit.map(item => {
         if (!item.data.stats) {
             return null
         }
         return {
             y: item.data.stats ? Number(item.data.stats.snrd) : 0,
-            x: item.data ? Number((Date.parse(item.data.date)).toString().slice(4)) : {}
+            x: item.data ? Number((Date.parse(item.data.date)).toString().slice(4,10)) : {}
         }
     }).reverse()
 
-    console.log(dataset)
-
-    const [legend, setLegend] = useState({
-        enabled: false,
-        textSize: 14,
-        form: 'SQUARE',
-        formSize: 14,
-        xEntrySpace: 10,
-        yEntrySpace: 5,
-        formToTextSpace: 5,
-        wordWrapEnabled: true,
-        maxSizePercent: 0.5
-    });
-    const [data, setData] = useState({
-        dataSets: [{
-            values: dataset,
-            label: 'Bar dataSet',
-            config: {
-                color: processColor('teal'),
-                barShadowColor: processColor('lightgrey'),
-                highlightAlpha: 90,
-                highlightColor: processColor('red'),
-            }
-        }],
-
-        config: {
-            barWidth: 0.7,
+    let snru_dataset = someshit.map(item => {
+        if (!item.data.stats) {
+            return null
         }
-    });
-    const [highlights, setHighlights] = useState([{ x: 3 }, { x: 6 }]);
-    const [xAxis, setXAxis] = useState({
-        enabled: true,
-        granularity: 0,
-        drawLabels: true,
-        position: "BOTTOM",
-        drawAxisLine: true,
-        drawGridLines: true,
-        fontFamily: "HelveticaNeue-Medium",
-        fontWeight: "normal",
-        textSize: 12,
-        textColor: processColor("white"),
-        valueFormatter: 'date',
-        valueFormatterPattern: "HH:mm:ss"
-    });
-
+        return {
+            y: item.data.stats ? Number(item.data.stats.snru) : 0,
+            x: item.data ? Number((Date.parse(item.data.date)).toString().slice(4,10)) : {}
+        }
+    }).reverse()
 
     return (
         <View style={styles.container}>
             <BarChart
                 style={styles.chart}
-                data={data}
-                xAxis={xAxis}
+                data={{
+                    dataSets: [{
+                        values: snrd_dataset,
+                        label: 'snrd',
+                        config: {
+                            color: processColor(palette.fluorescentBlue),
+                            valueTextColor: processColor(palette.babyPowder),
+                            drawValues: true
+                        }
+                    }],
+                    config: {
+                        barWidth: 1,
+                    }
+                }}
+                chartDescription={{ text: "Noise level", textColor: processColor("white") }}
+                marker={{
+                    enabled: true,
+                    markerColor: processColor("white"),
+                    textColor: processColor("black")
+                }}
+                xAxis={{
+                    enabled: true,
+                    granularity: 0,
+                    drawLabels: true,
+                    position: "BOTTOM",
+                    drawAxisLine: true,
+                    drawGridLines: true,
+                    fontFamily: "HelveticaNeue-Medium",
+                    fontWeight: "normal",
+                    textSize: 12,
+                    textColor: processColor("white"),
+                    valueFormatter: 'date',
+                    valueFormatterPattern: "HH:mm:ss",
+                    since: 0,
+                    timeUnit: "SECONDS",
+                }}
                 yAxis={{
                     left: {
                         enabled: false
                     },
                     right: {
-                        enabled: false
+                        enabled: true,
+                        textColor: processColor("white"),
                     }
                 }}
                 autoScaleMinMaxEnabled={true}
                 animation={{
-                    durationX: 0,
-                    durationY: 1500,
+                    durationX: 500,
+                    durationY: 250,
                     easingY: "EaseInOutQuart"
                 }}
-                legend={legend}
+                legend={{
+                    enabled: false,
+                    textColor: processColor(palette.babyPowder),
+                    textSize: 10,
+                    form: 'SQUARE',
+                    formSize: 10,
+                    xEntrySpace: 10,
+                    yEntrySpace: 5,
+                    formToTextSpace: 5,
+                    wordWrapEnabled: true,
+                    maxSizePercent: 0.5
+                }}
                 gridBackgroundColor={processColor('#ffffff')}
                 // visibleRange={{x: { min: 5, max: 5 }}}
                 drawBarShadow={false}
                 drawValueAboveBar={true}
                 drawHighlightArrow={true}
-                highlights={highlights}
-                onChange={(event) => console.log(event.nativeEvent)}
+                highlights={[]}
+                scaleXEnabled={true}
+                scaleYEnabled={false}
+            />
+            <BarChart
+                style={styles.chart}
+                data={{
+                    dataSets: [{
+                        values: snru_dataset,
+                        label: 'snru',
+                        config: {
+                            color: processColor(palette.fluorescentBlue),
+                            valueTextColor: processColor(palette.babyPowder),
+                            drawValues: true
+                        }
+                    }],
+                    config: {
+                        barWidth: 1,
+                    }
+                }}
+                chartDescription={{ text: "Noise level", textColor: processColor("white") }}
+                marker={{
+                    enabled: true,
+                    markerColor: processColor("white"),
+                    textColor: processColor("black")
+                }}
+                xAxis={{
+                    enabled: true,
+                    granularity: 0,
+                    drawLabels: true,
+                    position: "BOTTOM",
+                    drawAxisLine: true,
+                    drawGridLines: true,
+                    fontFamily: "HelveticaNeue-Medium",
+                    fontWeight: "normal",
+                    textSize: 12,
+                    textColor: processColor("white"),
+                    valueFormatter: 'date',
+                    valueFormatterPattern: "HH:mm:ss",
+                    since: 0,
+                    timeUnit: "SECONDS",
+                }}
+                yAxis={{
+                    left: {
+                        enabled: false
+                    },
+                    right: {
+                        enabled: true,
+                        textColor: processColor("white"),
+                    }
+                }}
+                autoScaleMinMaxEnabled={true}
+                animation={{
+                    durationX: 500,
+                    durationY: 250,
+                    easingY: "EaseInOutQuart"
+                }}
+                legend={{
+                    enabled: false,
+                    textColor: processColor(palette.babyPowder),
+                    textSize: 10,
+                    form: 'SQUARE',
+                    formSize: 10,
+                    xEntrySpace: 10,
+                    yEntrySpace: 5,
+                    formToTextSpace: 5,
+                    wordWrapEnabled: true,
+                    maxSizePercent: 0.5
+                }}
+                gridBackgroundColor={processColor('#ffffff')}
+                // visibleRange={{x: { min: 5, max: 5 }}}
+                drawBarShadow={false}
+                drawValueAboveBar={true}
+                drawHighlightArrow={true}
+                highlights={[]}
+                scaleXEnabled={true}
+                scaleYEnabled={false}
             />
         </View>
     )
@@ -104,8 +189,8 @@ export const SnrCharts = (prop) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: 300,
-        backgroundColor: palette.pacificBlue
+        height: 200,
+        backgroundColor: palette.richBlack
     },
     chart: {
         flex: 1
