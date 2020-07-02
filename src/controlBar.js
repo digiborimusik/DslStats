@@ -7,11 +7,12 @@ import { IntervalDispatcher } from './IntervalDispatcher';
 import { ModalSettings } from './ModalSettings';
 import { TheButton } from './TheButton';
 
-import {NumericInput} from './NumericInput';
-import {ClientPicker} from './ClientPicker';
+import { NumericInput } from './NumericInput';
+import { ClientPicker } from './ClientPicker';
 
-import RNPickerSelect from 'react-native-picker-select';
-import { Chevron } from 'react-native-shapes';
+import PlayIcon from "./svg/play.svg";
+import PauseIcon from "./svg/pause.svg";
+
 
 
 
@@ -31,14 +32,25 @@ export const ControlBar = (a) => {
     return (
         <View style={styles.controlBar}>
 
-            <TheButton label='START' active={status} action={() => { dispatch(run()) }} />
-            <TheButton label='STOP' active={!status} action={() => { dispatch(stop()) }} />
+            <TouchableHighlight
+                underlayColor={palette.babyPowder}
+                disabled={false}
+                onPress={status ? () => { dispatch(stop()) } : () => { dispatch(run()) } }
+            >
+                
+                {status ? <PauseIcon fill={palette.minionYellow} style={styles.button} /> : <PlayIcon fill={palette.richBlack} style={styles.button} /> }
+
+            </TouchableHighlight>
+
+            {/* <TheButton label='START' active={status} action={() => { dispatch(run()) }} />
+            <TheButton label='STOP' active={!status} action={() => { dispatch(stop()) }} /> */}
+
             {status ? <IntervalDispatcher client={client} ms={intervalValue} status /> : null}
 
             <View style={{ marginLeft: 'auto' }}></View>
-            
+
             <ClientPicker />
-            
+
             <NumericInput />
 
 
@@ -90,7 +102,9 @@ const styles = StyleSheet.create({
         backgroundColor: palette.babyPowder,
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        alignItems: "center"
+        alignItems: "center",
+        paddingLeft:8,
+        paddingRight:8
     },
     picker: {
         width: 200,
@@ -98,5 +112,12 @@ const styles = StyleSheet.create({
         color: palette.richBlack,
         marginLeft: 'auto',
         fontSize: 12
+    },
+    button: {
+        width:30,
+        height:30,
+        padding: 8,
+        marginLeft: 4,
+        marginRight: 4
     }
 });

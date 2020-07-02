@@ -8,6 +8,12 @@ export const RawDataDisplay = (prop) => {
 
     const someshit = prop.someshit
 
+    const getData = () => {
+        const data = [...prop.someshit]
+        console.log(data)
+        return data.reverse()
+    }
+
     const [showModal, setShowModal] = useState(false);
 
     const onPressHandler = () => {
@@ -27,13 +33,15 @@ export const RawDataDisplay = (prop) => {
 
     return (
         <>
-            <ScrollView style={{maxHeight:400}}>
+            <View 
+            // style={{maxHeight:400}}
+            >
                 <Modal animationType="slide" transparent={true} visible={showModal}>
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
                             <Text style={{ color: palette.babyPowder, fontWeight: 'bold', marginBottom: 12 }}>Raw data Log</Text>
                             <FlatList
-                                data={someshit}
+                                data={getData()}
                                 renderItem={({ item }) => <ItemRender item={item} />}
                                 ItemSeparatorComponent={() => {
                                     return <View style={{ width: '100%', height: 1, margin: 12, backgroundColor: palette.babyPowder }}></View>
@@ -51,10 +59,10 @@ export const RawDataDisplay = (prop) => {
                     <TouchableOpacity
                         onPress={onPressHandler}
                         underlayColor={palette.minionYellow} >
-                        {someshit.length ? <ItemRender item={someshit[0]} /> : <Text style={styles.resultAreaText} >No data</Text>}
+                        {someshit.length ? <ItemRender item={someshit[someshit.length - 1]} /> : <Text style={styles.resultAreaText} >No data</Text>}
                     </TouchableOpacity>
                 </View>
-            </ScrollView>
+            </View>
         </>
     )
 }

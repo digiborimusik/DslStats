@@ -8,9 +8,9 @@ import { BarChart } from 'react-native-charts-wrapper';
 const greenBlue = "rgb(26, 182, 151)";
 const petrel = "rgb(59, 145, 153)";
 
-export const SnrCharts = (prop) => {
-
-    const someshit = useSelector(state => state.testReducer.someshitList);
+export const SnrBarCharts = (prop) => {
+    const someshit = prop.someshit
+    // const someshit = useSelector(state => state.testReducer.someshitList);
 
     let snrd_dataset = someshit.map(item => {
         if (!item.data.stats) {
@@ -20,8 +20,10 @@ export const SnrCharts = (prop) => {
             y: item.data.stats ? Number(item.data.stats.snrd) : 0,
             x: item.data ? Number((Date.parse(item.data.date)).toString().slice(4,10)) : {}
         }
-    }).reverse()
+    })
 
+    // console.log(snrd_dataset)
+    
     let snru_dataset = someshit.map(item => {
         if (!item.data.stats) {
             return null
@@ -30,7 +32,7 @@ export const SnrCharts = (prop) => {
             y: item.data.stats ? Number(item.data.stats.snru) : 0,
             x: item.data ? Number((Date.parse(item.data.date)).toString().slice(4,10)) : {}
         }
-    }).reverse()
+    })
 
     return (
         <View style={styles.container}>
@@ -103,10 +105,12 @@ export const SnrCharts = (prop) => {
                 // visibleRange={{x: { min: 5, max: 5 }}}
                 drawBarShadow={false}
                 drawValueAboveBar={true}
-                drawHighlightArrow={true}
+                drawHighlightArrow={false}
                 highlights={[]}
                 scaleXEnabled={true}
                 scaleYEnabled={false}
+                pinchZoom={false}
+                doubleTapToZoomEnabled={false}
             />
             <BarChart
                 style={styles.chart}
@@ -177,10 +181,12 @@ export const SnrCharts = (prop) => {
                 // visibleRange={{x: { min: 5, max: 5 }}}
                 drawBarShadow={false}
                 drawValueAboveBar={true}
-                drawHighlightArrow={true}
+                drawHighlightArrow={false}
                 highlights={[]}
                 scaleXEnabled={true}
                 scaleYEnabled={false}
+                pinchZoom={false}
+                doubleTapToZoomEnabled={false}
             />
         </View>
     )

@@ -6,7 +6,9 @@ import { add_something, telnet_request } from './redux/actions';
 
 import { RawDataDisplay } from './RawDataDisplay'
 import { ParsedStatsBar } from './ParsedStatsBar'
-import { SnrCharts } from './SnrCharts'
+import { YoglerBar } from './YoglerBar'
+import { SnrBarCharts } from './SnrBarCharts'
+import { NewCharts } from './NewCharts'
 
 export const CurrentDataDisplay = () => {
     const someshit = useSelector(state => state.testReducer.someshitList);
@@ -27,9 +29,12 @@ export const CurrentDataDisplay = () => {
             <ScrollView>
                 <ParsedStatsBar someshit={someshit} />
 
+                <YoglerBar />
+
                 {showRaw ? <RawDataDisplay someshit={someshit} /> : null}
 
-                {showSnrCharts ? <SnrCharts /> : null}
+                {showSnrCharts ? <SnrBarCharts someshit={someshit} /> : null}
+                
             </ScrollView>
         </View>
 

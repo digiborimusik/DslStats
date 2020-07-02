@@ -6,7 +6,7 @@ import { add_something, telnet_request, run, stop, set_client } from './redux/ac
 
 
 
-
+import Logo from "./svg/play.svg";
 
 export const TheButton = (prop) => {
 
@@ -29,6 +29,7 @@ export const TheButton = (prop) => {
                 ]}>
                     {prop.label}
             </Text>
+            
         </TouchableHighlight>
     )
 }

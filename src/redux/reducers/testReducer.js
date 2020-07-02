@@ -71,40 +71,40 @@ const testReducer = (state = initialState, action) => {
         ...state,
         viewParameters: { ...state.viewParameters, showRaw: false, showSnrCharts: false, showAttCharts: false, showErrorsCharts: true }
       }
-    // case TELNET_REQUEST_SUCCEED:
-    //   return {
-    //     ...state,
-    //     someshitList: state.someshitList.concat({
-    //       key: Math.random(),
-    //       data: action.data
-    //     })
-    //   };
     case TELNET_REQUEST_SUCCEED:
       return {
         ...state,
-        someshitList: [{
+        someshitList: state.someshitList.concat({
           key: Math.random(),
           data: action.data
-        }].concat(state.someshitList)
+        })
       };
-
-    // case TELNET_REQUEST_FAILED:
+    // case TELNET_REQUEST_SUCCEED:
     //   return {
     //     ...state,
-    //     someshitList: state.someshitList.concat({
+    //     someshitList: [{
     //       key: Math.random(),
     //       data: action.data
-    //     })
+    //     }].concat(state.someshitList)
     //   };
 
     case TELNET_REQUEST_FAILED:
       return {
         ...state,
-        someshitList: [{
+        someshitList: state.someshitList.concat({
           key: Math.random(),
           data: action.data
-        }].concat(state.someshitList)
+        })
       };
+
+    // case TELNET_REQUEST_FAILED:
+    //   return {
+    //     ...state,
+    //     someshitList: [{
+    //       key: Math.random(),
+    //       data: action.data
+    //     }].concat(state.someshitList)
+    //   };
 
 
     case DELETE_SOMETHING:

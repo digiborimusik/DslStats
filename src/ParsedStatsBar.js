@@ -2,23 +2,12 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Modal, FlatList } from 'react-native';
 import palette from './modules/colorPalette';
 
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { show_raw, show_snrcharts , show_attcharts , show_errorscharts } from './redux/actions';
-
-import { TheButton } from './TheButton'
 
 export const ParsedStatsBar = (prop) => {
-    data = prop.someshit[0] ? prop.someshit[0].data : null;
-    stats = prop.someshit[0] ? prop.someshit[0].data.stats : null;
+    data = prop.someshit[prop.someshit.length - 1] ? prop.someshit[prop.someshit.length - 1].data : null;
+    stats = prop.someshit[prop.someshit.length - 1] ? prop.someshit[prop.someshit.length - 1].data.stats : null;
     const [showSNR, setShowSNR] = useState(false);
     const [showLog, setShowLog] = useState(false);
-
-    const dispatch = useDispatch();
-
-    const showRaw = useSelector(state => state.testReducer.viewParameters.showRaw);
-    const showSnrCharts = useSelector(state => state.testReducer.viewParameters.showSnrCharts);
-    const showAttCharts = useSelector(state => state.testReducer.viewParameters.showAttCharts);
-    const showErrorsCharts = useSelector(state => state.testReducer.viewParameters.showErrorsCharts);
 
     return (
         <>
@@ -87,20 +76,6 @@ export const ParsedStatsBar = (prop) => {
                     </View>
                 </View>
             </View>
-            <View style={styles.buttons} >
-                <TouchableOpacity onPress={() => { dispatch(show_raw()) }} >
-                    <Text style={[styles.toggler, showRaw ? styles.togglerActive : null]} >RAW</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { dispatch(show_snrcharts()) }} >
-                    <Text style={[styles.toggler, showSnrCharts ? styles.togglerActive : null]} >SNR</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Text style={[styles.toggler, showSNR ? styles.togglerActive : null]} >ATT</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Text style={[styles.toggler, showLog ? styles.togglerActive : null]} >ERRORS</Text>
-                </TouchableOpacity>
-            </View>
         </>
     )
 }
@@ -139,29 +114,5 @@ const styles = StyleSheet.create({
         fontWeight: '100',
         fontSize: 6,
         padding: 2
-    },
-    buttons: {
-        backgroundColor: palette.p,
-        // height:40,
-        width: '100%',
-        flexDirection: 'row',
-        // justifyContent: 'flex-end',
-        // position: 'absolute'
-        // borderBottomColor:palette.babyPowder,
-        // borderWidth:1
-    },
-    toggler: {
-        color: palette.babyPowder,
-
-        padding: 6,
-        fontSize: 10,
-
-    },
-    togglerActive: {
-        backgroundColor: palette.minionYellow,
-        // color:palette.minionYellow,
-        textShadowColor: palette.minionYellow,
-        textShadowOffset: { width: -1, height: 1 },
-        textShadowRadius: 10
     }
 })
