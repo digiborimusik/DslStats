@@ -9,13 +9,13 @@ import {CurrentDataDisplay} from './src/CurrentDataDisplay';
 
 const App = () => {
 
-	// const someshit = useSelector(state => state.testReducer.someshitList);
+	const status = useSelector(state => state.testReducer.status);
 
 	// console.log('LATEST', someshit[someshit.length - 1])
 
 	return (
 		<>
-			<StatusBar barStyle="light-content" backgroundColor={palette.richBlack} />
+			<StatusBar barStyle="dark-content" backgroundColor={status.isRun ? palette.minionYellow : palette.babyPowder} />
 			<SafeAreaView style={[styles.safeArea]}>
 				<View style={[styles.contentSubArea]}>
 					<CurrentDataDisplay />

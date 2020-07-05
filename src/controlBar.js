@@ -30,7 +30,7 @@ export const ControlBar = (a) => {
 
     console.log(a)
     return (
-        <View style={styles.controlBar}>
+        <View style={[styles.controlBar,status ? {backgroundColor:palette.minionYellow} : {backgroundColor:palette.babyPowder}]}>
 
             <TouchableHighlight
                 underlayColor={palette.babyPowder}
@@ -38,7 +38,7 @@ export const ControlBar = (a) => {
                 onPress={status ? () => { dispatch(stop()) } : () => { dispatch(run()) } }
             >
                 
-                {status ? <PauseIcon fill={palette.minionYellow} style={styles.button} /> : <PlayIcon fill={palette.richBlack} style={styles.button} /> }
+                {status ? <PauseIcon fill={palette.richBlack} style={styles.button} /> : <PlayIcon fill={palette.richBlack} style={styles.button} /> }
 
             </TouchableHighlight>
 
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     },
     button: {
         width:30,
-        height:30,
+        height:25,
         padding: 8,
         marginLeft: 4,
         marginRight: 4

@@ -37,7 +37,7 @@ export const YoglerBar = () => {
             
             <View style={styles.container}>
                 <Toggler name={'RAW'} active={showRaw} action={() => { dispatch(show_raw()) }} />
-                <Toggler name={'SNR'} active={showSnrCharts} action={() => { dispatch(show_snrcharts()) }} />
+                <Toggler name={'SNR-Bar'} active={showSnrCharts} action={() => { dispatch(show_snrcharts()) }} />
                 <Toggler name={'ATT'} active={false} />
                 <Toggler name={'FEC'} active={true} />
                 <Toggler name={'CRC'} active={true} />

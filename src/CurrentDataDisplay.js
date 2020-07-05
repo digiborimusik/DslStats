@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
     },
     topBarText: {
         color: palette.richBlack,
-        fontWeight: '100',
+        fontWeight: 'bold',
+        fontSize:16,
         padding: 6
     }
 })

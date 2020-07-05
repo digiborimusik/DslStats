@@ -11,37 +11,55 @@ const petrel = "rgb(59, 145, 153)";
 export const SnrBarCharts = (prop) => {
     const someshit = prop.someshit
     // const someshit = useSelector(state => state.testReducer.someshitList);
+    const [yRange, setYrange] = useState(5);
+
 
     let snrd_dataset = someshit.map(item => {
+        
         if (!item.data.stats) {
             return null
         }
+
+        let numA = Number(someshit[someshit.length - 1].data.dateNumberic.toString().slice(4, 10)) - yRange * 60;
+        let numB = Number(item.data.dateNumberic.toString().slice(4, 10))
+
+        if(numA > numB){
+            return
+        }
+
         return {
             y: item.data.stats ? Number(item.data.stats.snrd) : 0,
-            x: item.data ? Number((Date.parse(item.data.date)).toString().slice(4,10)) : {}
+            x: item.data ? Number(item.data.dateNumberic.toString().slice(4, 10)) : {}
         }
     })
 
-    // console.log(snrd_dataset)
-    
     let snru_dataset = someshit.map(item => {
         if (!item.data.stats) {
             return null
         }
+
+        let numA = Number(someshit[someshit.length - 1].data.dateNumberic.toString().slice(4, 10)) - yRange * 60;
+        let numB = Number(item.data.dateNumberic.toString().slice(4, 10))
+
+        if(numA > numB){
+            return
+        }
+
         return {
             y: item.data.stats ? Number(item.data.stats.snru) : 0,
-            x: item.data ? Number((Date.parse(item.data.date)).toString().slice(4,10)) : {}
+            x: item.data ? Number(item.data.dateNumberic.toString().slice(4, 10)) : {}
         }
     })
 
     return (
         <View style={styles.container}>
+            <Text style={styles.heading}>SNR Signal to noise margin</Text>
             <BarChart
                 style={styles.chart}
                 data={{
                     dataSets: [{
                         values: snrd_dataset,
-                        label: 'snrd',
+                        label: 'Download',
                         config: {
                             color: processColor(palette.fluorescentBlue),
                             valueTextColor: processColor(palette.babyPowder),
@@ -52,7 +70,7 @@ export const SnrBarCharts = (prop) => {
                         barWidth: 1,
                     }
                 }}
-                chartDescription={{ text: "Noise level", textColor: processColor("white") }}
+                chartDescription={{ text: "DOWNLOAD SINGAL TO NOISE MARGIN", textColor: processColor("black") }}
                 marker={{
                     enabled: true,
                     markerColor: processColor("white"),
@@ -67,23 +85,29 @@ export const SnrBarCharts = (prop) => {
                     drawGridLines: true,
                     fontFamily: "HelveticaNeue-Medium",
                     fontWeight: "normal",
-                    textSize: 12,
+                    textSize: 10,
                     textColor: processColor("white"),
                     valueFormatter: 'date',
                     valueFormatterPattern: "HH:mm:ss",
                     since: 0,
                     timeUnit: "SECONDS",
+                    // axisMinimum: snrd_dataset[300].x
+
                 }}
                 yAxis={{
+
                     left: {
-                        enabled: false
+                        enabled: false,
+                        axisMinimum: 0
+                        
                     },
                     right: {
                         enabled: true,
                         textColor: processColor("white"),
+                        axisMinimum: 0
                     }
                 }}
-                autoScaleMinMaxEnabled={true}
+                autoScaleMinMaxEnabled={false}
                 animation={{
                     durationX: 500,
                     durationY: 250,
@@ -92,7 +116,7 @@ export const SnrBarCharts = (prop) => {
                 legend={{
                     enabled: false,
                     textColor: processColor(palette.babyPowder),
-                    textSize: 10,
+                    textSize: 12,
                     form: 'SQUARE',
                     formSize: 10,
                     xEntrySpace: 10,
@@ -102,7 +126,6 @@ export const SnrBarCharts = (prop) => {
                     maxSizePercent: 0.5
                 }}
                 gridBackgroundColor={processColor('#ffffff')}
-                // visibleRange={{x: { min: 5, max: 5 }}}
                 drawBarShadow={false}
                 drawValueAboveBar={true}
                 drawHighlightArrow={false}
@@ -111,13 +134,15 @@ export const SnrBarCharts = (prop) => {
                 scaleYEnabled={false}
                 pinchZoom={false}
                 doubleTapToZoomEnabled={false}
+                maxVisibleValueCount={200}
+
             />
             <BarChart
                 style={styles.chart}
                 data={{
                     dataSets: [{
                         values: snru_dataset,
-                        label: 'snru',
+                        label: 'Upload',
                         config: {
                             color: processColor(palette.fluorescentBlue),
                             valueTextColor: processColor(palette.babyPowder),
@@ -128,7 +153,7 @@ export const SnrBarCharts = (prop) => {
                         barWidth: 1,
                     }
                 }}
-                chartDescription={{ text: "Noise level", textColor: processColor("white") }}
+                chartDescription={{ text: "UPLOAD SINGAL TO NOISE MARGIN", textColor: processColor("black") }}
                 marker={{
                     enabled: true,
                     markerColor: processColor("white"),
@@ -143,23 +168,28 @@ export const SnrBarCharts = (prop) => {
                     drawGridLines: true,
                     fontFamily: "HelveticaNeue-Medium",
                     fontWeight: "normal",
-                    textSize: 12,
+                    textSize: 10,
                     textColor: processColor("white"),
                     valueFormatter: 'date',
                     valueFormatterPattern: "HH:mm:ss",
                     since: 0,
-                    timeUnit: "SECONDS",
+                    timeUnit: "SECONDS"
+
                 }}
                 yAxis={{
+
                     left: {
-                        enabled: false
+                        enabled: false,
+                        axisMinimum: 0
+                        
                     },
                     right: {
                         enabled: true,
                         textColor: processColor("white"),
+                        axisMinimum: 0
                     }
                 }}
-                autoScaleMinMaxEnabled={true}
+                autoScaleMinMaxEnabled={false}
                 animation={{
                     durationX: 500,
                     durationY: 250,
@@ -168,7 +198,7 @@ export const SnrBarCharts = (prop) => {
                 legend={{
                     enabled: false,
                     textColor: processColor(palette.babyPowder),
-                    textSize: 10,
+                    textSize: 12,
                     form: 'SQUARE',
                     formSize: 10,
                     xEntrySpace: 10,
@@ -178,7 +208,6 @@ export const SnrBarCharts = (prop) => {
                     maxSizePercent: 0.5
                 }}
                 gridBackgroundColor={processColor('#ffffff')}
-                // visibleRange={{x: { min: 5, max: 5 }}}
                 drawBarShadow={false}
                 drawValueAboveBar={true}
                 drawHighlightArrow={false}
@@ -187,6 +216,8 @@ export const SnrBarCharts = (prop) => {
                 scaleYEnabled={false}
                 pinchZoom={false}
                 doubleTapToZoomEnabled={false}
+                maxVisibleValueCount={200}
+
             />
         </View>
     )
@@ -200,5 +231,9 @@ const styles = StyleSheet.create({
     },
     chart: {
         flex: 1
+    },
+    heading:{
+        color:palette.babyPowder
     }
+
 });
