@@ -7,14 +7,14 @@ import { BarChart } from 'react-native-charts-wrapper';
 
 import ExpandSvg from "./svg/expand.svg";
 
-export const SnrBarCharts = (prop) => {
+export const CrcBarCharts = (prop) => {
     const someshit = prop.someshit
     // const someshit = useSelector(state => state.testReducer.someshitList);
     const [yRange, setYrange] = useState(0.5);
     const [expandHeight, setExpandHeight] = useState(false);
 
 
-    let snrd_dataset = someshit.map(item => {
+    let crcd_dataset = someshit.map(item => {
 
         if (!item.data.stats) {
             return null
@@ -28,12 +28,12 @@ export const SnrBarCharts = (prop) => {
         }
 
         return {
-            y: item.data.stats ? Number(item.data.stats.snrd) : 0,
+            y: item.data.stats ? Number(item.data.stats.crcd) : 0,
             x: item.data ? Number(item.data.dateNumberic.toString().slice(4, 10)) : {}
         }
     })
 
-    let snru_dataset = someshit.map(item => {
+    let crcu_dataset = someshit.map(item => {
         if (!item.data.stats) {
             return null
         }
@@ -46,7 +46,7 @@ export const SnrBarCharts = (prop) => {
         }
 
         return {
-            y: item.data.stats ? Number(item.data.stats.snru) : 0,
+            y: item.data.stats ? Number(item.data.stats.crcu) : 0,
             x: item.data ? Number(item.data.dateNumberic.toString().slice(4, 10)) : {}
         }
     })
@@ -61,7 +61,7 @@ export const SnrBarCharts = (prop) => {
                     <Text style={{
                         color: palette.babyPowder,
                         fontWeight: 'bold'
-                    }}>SINGAL TO NOISE MARGIN</Text>
+                    }}>RS UNCORRECTABLE / CRC</Text>
                 </View>
                 <TouchableOpacity 
                 
@@ -80,7 +80,7 @@ export const SnrBarCharts = (prop) => {
                 style={{ flex: 1 }}
                 data={{
                     dataSets: [{
-                        values: snrd_dataset,
+                        values: crcd_dataset,
                         label: 'Download',
                         config: {
                             color: processColor(palette.fluorescentBlue),
@@ -92,7 +92,7 @@ export const SnrBarCharts = (prop) => {
                         barWidth: 1,
                     }
                 }}
-                chartDescription={{ text: "DOWNLOAD SNRM", textColor: processColor("black") }}
+                chartDescription={{ text: "DOWNLOAD CRC", textColor: processColor("black") }}
                 marker={{
                     enabled: true,
                     markerColor: processColor("white"),
@@ -163,7 +163,7 @@ export const SnrBarCharts = (prop) => {
                 style={{ flex: 1 }}
                 data={{
                     dataSets: [{
-                        values: snru_dataset,
+                        values: crcu_dataset,
                         label: 'Upload',
                         config: {
                             color: processColor(palette.fluorescentBlue),
@@ -175,7 +175,7 @@ export const SnrBarCharts = (prop) => {
                         barWidth: 1,
                     }
                 }}
-                chartDescription={{ text: "UPLOAD SNRM", textColor: processColor("black") }}
+                chartDescription={{ text: "UPLOAD CRC", textColor: processColor("black") }}
                 marker={{
                     enabled: true,
                     markerColor: processColor("white"),

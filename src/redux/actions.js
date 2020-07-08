@@ -1,4 +1,4 @@
-import { ADD_SOMETHING, MODIFY_SOMETHING , DELETE_SOMETHING , TELNET_REQUEST , TELNET_REQUEST_SUCCEED , TELNET_REQUEST_FAILED , RUN , STOP , SET_CLIENT , SET_INTERVAL , SET_LOGIN , SET_PASSWORD , SET_IP , SHOW_RAW , SHOW_SNRCHARTS , SHOW_ATTCHARTS , SHOW_ERRORSCHARTS} from './actionTypes';
+import { ADD_SOMETHING, MODIFY_SOMETHING , DELETE_SOMETHING , TELNET_REQUEST , TELNET_REQUEST_SUCCEED , TELNET_REQUEST_FAILED , RUN , STOP , SET_CLIENT , SET_INTERVAL , SET_LOGIN , SET_PASSWORD , SET_IP } from './actionTypes';
 
 
 export const delete_something = (key) => (
@@ -53,29 +53,6 @@ export const set_ip = (data) => (
     }
 )
 
-export const show_raw = () => (
-    {
-        type: SHOW_RAW
-    }
-)
-
-export const show_snrcharts = () => (
-    {
-        type: SHOW_SNRCHARTS
-    }
-)
-
-export const show_attcharts = () => (
-    {
-        type: SHOW_ATTCHARTS
-    }
-)
-
-export const show_errorscharts = () => (
-    {
-        type: SHOW_ERRORSCHARTS
-    }
-)
 
 
 

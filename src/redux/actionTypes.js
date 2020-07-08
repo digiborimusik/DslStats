@@ -16,8 +16,3 @@ export const SET_INTERVAL = "SET_INTERVAL";
 export const SET_LOGIN = "SET_LOGIN";
 export const SET_PASSWORD = "SET_PASSWORD";
 export const SET_IP = "SET_IP";
-
-export const SHOW_RAW = "SHOW_RAW";
-export const SHOW_SNRCHARTS = "SHOW_SNRCHARTS";
-export const SHOW_ATTCHARTS = "SHOW_ATTCHARTS";
-export const SHOW_ERRORSCHARTS = "SHOW_ERRORSCHARTS";

@@ -40,11 +40,11 @@ export const ParsedStatsBar = (prop) => {
                         <Text style={styles.statText}>ATT</Text>
                     </View>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.rsCorrD : '---'}</Text>
+                        <Text style={styles.statValue}>{stats ? stats.fecd : '---'}</Text>
                         <Text style={styles.statText}>FEC</Text>
                     </View>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.rsUncorrD : '---'}</Text>
+                        <Text style={styles.statValue}>{stats ? stats.crcd : '---'}</Text>
                         <Text style={styles.statText}>CRC</Text>
                     </View>
                 </View>
@@ -67,11 +67,11 @@ export const ParsedStatsBar = (prop) => {
                         <Text style={styles.statText}>ATT</Text>
                     </View>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.rsCorrU : '---'}</Text>
+                        <Text style={styles.statValue}>{stats ? stats.fecu : '---'}</Text>
                         <Text style={styles.statText}>FEC</Text>
                     </View>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.rsUncorrU : '---'}</Text>
+                        <Text style={styles.statValue}>{stats ? stats.crcu : '---'}</Text>
                         <Text style={styles.statText}>CRC</Text>
                     </View>
                 </View>

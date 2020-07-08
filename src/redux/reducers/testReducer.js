@@ -1,4 +1,4 @@
-import { ADD_SOMETHING, MODIFY_SOMETHING, DELETE_SOMETHING, TELNET_REQUEST, TELNET_REQUEST_SUCCEED, TELNET_REQUEST_FAILED, RUN, STOP, SET_CLIENT, SET_INTERVAL, SET_IP, SET_LOGIN, SET_PASSWORD, SHOW_RAW, SHOW_SNRCHARTS, SHOW_ATTCHARTS, SHOW_ERRORSCHARTS } from '../actionTypes';
+import { ADD_SOMETHING, MODIFY_SOMETHING, DELETE_SOMETHING, TELNET_REQUEST, TELNET_REQUEST_SUCCEED, TELNET_REQUEST_FAILED, RUN, STOP, SET_CLIENT, SET_INTERVAL, SET_IP, SET_LOGIN, SET_PASSWORD} from '../actionTypes';
 import tlnt from '../../modules/tlnt';
 const stats = tlnt;
 
@@ -6,9 +6,7 @@ const stats = tlnt;
 const initialState = {
   someshitList: [],
   status: { isRun: false, date: null },
-  options: { client: 'Dlink2640u', interval: 1, login: 'admin', password: 'admin', ip: '192.168.1.1' },
-  viewParameters: { showRaw: false, showSnrCharts: true, showAttCharts: false, showErrorsCharts: false }
-
+  options: { client: 'Dlink2640u', interval: 1, login: 'admin', password: 'admin', ip: '192.168.1.1' }
 }
 
 const testReducer = (state = initialState, action) => {
@@ -51,26 +49,8 @@ const testReducer = (state = initialState, action) => {
         ...state,
         options: { ...state.options, ip: action.data }
       }
-    case SHOW_RAW:
-      return {
-        ...state,
-        viewParameters: { ...state.viewParameters, showRaw: true, showSnrCharts: false, showAttCharts: false, showErrorsCharts: false }
-      }
-    case SHOW_SNRCHARTS:
-      return {
-        ...state,
-        viewParameters: { ...state.viewParameters, showRaw: false, showSnrCharts: true, showAttCharts: false, showErrorsCharts: false }
-      }
-    case SHOW_ATTCHARTS:
-      return {
-        ...state,
-        viewParameters: { ...state.viewParameters, showRaw: false, showSnrCharts: false, showAttCharts: true, showErrorsCharts: false }
-      }
-    case SHOW_ERRORSCHARTS:
-      return {
-        ...state,
-        viewParameters: { ...state.viewParameters, showRaw: false, showSnrCharts: false, showAttCharts: false, showErrorsCharts: true }
-      }
+
+
     case TELNET_REQUEST_SUCCEED:
       return {
         ...state,
