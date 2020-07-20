@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button, TouchableOpacity } from 'react-native';
 import {useDispatch, useSelector } from 'react-redux';
-import { add_something, telnet_request, run, stop, set_client, telnet_request_succed, telnet_request_failed } from './redux/actions';
+import { add_something, telnet_request, run, stop, set_client, telnet_request_succed, telnet_request_failed, data_request_succed , data_request_failed } from './redux/actions';
 
 
 const LineStatsLoader = require('./modules/LineStatsLoader')
@@ -38,7 +38,10 @@ export const IntervalDispatcher = (prop) => {
     tickHandler = () => {
         client.getStats()
         .then(a => {
+            let dateNumberic = Number(Date.parse(new Date()).toString().slice(4, 10));
             dispatch(telnet_request_succed({ ...a, ...{ counter: counterValue, date: new Date(), dateNumberic:Date.parse(new Date()), rand:Math.round((Math.random() * 100)) } }))
+
+            // dispatch(data_request_succed({...a,dateNumberic}))
         })
         .catch(e => {
             dispatch(telnet_request_failed({ raw: e, ...{ counter: counterValue, date: new Date(), dateNumberic:Date.parse(new Date()) } }))

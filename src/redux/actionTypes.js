@@ -7,6 +7,11 @@ export const TELNET_REQUEST = "TELNET_REQUEST";
 export const TELNET_REQUEST_SUCCEED = "TELNET_REQUEST_SUCCEED";
 export const TELNET_REQUEST_FAILED = "TELNET_REQUEST_FAILED";
 
+
+export const DATAREQUEST_SUCCED = "DATAREQUEST_SUCCED";
+export const DATAREQUEST_FAILED = "DATAREQUEST_FAILED";
+
+
 export const RUN = "RUN";
 export const STOP = "STOP";
 
@@ -16,3 +21,4 @@ export const SET_INTERVAL = "SET_INTERVAL";
 export const SET_LOGIN = "SET_LOGIN";
 export const SET_PASSWORD = "SET_PASSWORD";
 export const SET_IP = "SET_IP";
+

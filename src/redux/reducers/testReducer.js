@@ -1,6 +1,5 @@
 import { ADD_SOMETHING, MODIFY_SOMETHING, DELETE_SOMETHING, TELNET_REQUEST, TELNET_REQUEST_SUCCEED, TELNET_REQUEST_FAILED, RUN, STOP, SET_CLIENT, SET_INTERVAL, SET_IP, SET_LOGIN, SET_PASSWORD} from '../actionTypes';
-import tlnt from '../../modules/tlnt';
-const stats = tlnt;
+
 
 
 const initialState = {
@@ -10,7 +9,7 @@ const initialState = {
 }
 
 const testReducer = (state = initialState, action) => {
-  console.log('reducer', action)
+  // console.log('reducer', action)
   switch (action.type) {
     case RUN:
       return {

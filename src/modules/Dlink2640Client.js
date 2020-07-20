@@ -38,12 +38,12 @@ module.exports = class Dlink2640Client extends Client {
         stats = {
             maxUpSpd:'2455',maxDwSpd:'12412',
             UpSpd:'1445',DwSpd:'10200',
-            snrd:Math.round((Math.random() * 3.9 + 9)).toString(),snru:Math.round((Math.random() * 5.3 + 9)).toString(),
-            attnd:'50',attnu:'34',
-            fecd:Math.round((Math.random() * 6.5)).toString(),
-            fecu:Math.round((Math.random() * 7.5)).toString(),
-            crcd:Math.round((Math.random() * 3.5)).toString(),
-            crcu:Math.round((Math.random() * 5.5)).toString()
+            snrd:Math.round((Math.random() * 3.9 + 9)),snru:Math.round((Math.random() * 5.3 + 9)),
+            attnd:50,attnu:34,
+            fecd:Math.round((Math.random() * 6.5)),
+            fecu:Math.round((Math.random() * 7.5)),
+            crcd:Math.round((Math.random() * 3.5)),
+            crcu:Math.round((Math.random() * 5.5))
         }
 
     

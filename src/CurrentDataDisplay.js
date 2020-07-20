@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button, TouchableOpacity , TouchableHighlight } from 'react-native';
+import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button, TouchableOpacity, TouchableHighlight } from 'react-native';
 import palette from './modules/colorPalette';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { add_something, telnet_request } from './redux/actions';
@@ -8,6 +8,7 @@ import { RawDataDisplay } from './RawDataDisplay'
 import { ParsedStatsBar } from './ParsedStatsBar'
 // import { YoglerBar } from './YoglerBar'
 import { SnrBarCharts } from './SnrBarCharts'
+import { SnrLineCharts } from './SnrLineCharts'
 import { AttBarCharts } from './AttBarCharts'
 import { FecBarCharts } from './FecBarCharts'
 import { CrcBarCharts } from './CrcBarCharts'
@@ -17,9 +18,10 @@ export const CurrentDataDisplay = () => {
     const status = useSelector(state => state.testReducer.status);
 
     const [showRaw, setShowRaw] = useState(false);
-    const [showSnrCharts, setShowSnrCharts] = useState(true);
+    const [showSnrBarCharts, setShowSnrBarCharts] = useState(false);
+    const [showSnrLineCharts, setShowSnrLineCharts] = useState(true);
     const [showAttCharts, setShowAttCharts] = useState(false);
-    const [showFecCharts, setShowFecCharts] = useState(false);
+    const [showFecCharts, setShowFecCharts] = useState(true);
     const [showCrcCharts, setShowCrcCharts] = useState(false);
 
     const Yoggler = (prop) => {
@@ -46,22 +48,31 @@ export const CurrentDataDisplay = () => {
 
     const YoglerBar = () => {
         return (
-            <View style={{
-                flexDirection: 'row',
-                justifyContent: 'space-around'
-            }}>
-                <Yoggler name={'RAW'} active={showRaw} action={() => setShowRaw(!showRaw)} />
-                <Yoggler name={'SNRM'} active={showSnrCharts} action={() => setShowSnrCharts(!showSnrCharts)} />
-                <Yoggler name={'ATT'} active={showAttCharts} action={() => setShowAttCharts(!showAttCharts)} />
-                <Yoggler name={'FEC'} active={showFecCharts} action={() => setShowFecCharts(!showFecCharts)} />
-                <Yoggler name={'CRC'} active={showCrcCharts} action={() => setShowCrcCharts(!showCrcCharts)} />
-            </View>
+            <ScrollView horizontal={true} >
+                <View style={{
+                    flexDirection: 'row',
+                    width:600,
+                    // backgroundColor:'gray',
+                    justifyContent: 'space-around'
+                }}>
+                    <Yoggler name={'RAW'} active={showRaw} action={() => setShowRaw(!showRaw)} />
+                    <Yoggler name={'S-Bar'} active={showSnrBarCharts} action={() => setShowSnrBarCharts(!showSnrBarCharts)} />
+                    <Yoggler name={'S-Line'} active={showSnrLineCharts} action={() => setShowSnrLineCharts(!showSnrLineCharts)} />
+                    <Yoggler name={'A-Bar'} active={showAttCharts} action={() => setShowAttCharts(!showAttCharts)} />
+                    <Yoggler name={'F-Bar'} active={showFecCharts} action={() => setShowFecCharts(!showFecCharts)} />
+                    <Yoggler name={'C-Bar'} active={showCrcCharts} action={() => setShowCrcCharts(!showCrcCharts)} />
+                    <Yoggler name={'A-Line'} active={showAttCharts} action={() => setShowAttCharts(!showAttCharts)} />
+                    <Yoggler name={'F-Line'} active={showFecCharts} action={() => setShowFecCharts(!showFecCharts)} />
+                    <Yoggler name={'C-Line'} active={showCrcCharts} action={() => setShowCrcCharts(!showCrcCharts)} />
+                </View>
+            </ScrollView>
+
         )
     }
 
     return (
 
-        <View style={{flex:1}}>
+        <View style={{ flex: 1 }}>
             <View style={[styles.topBar, status.isRun ? { backgroundColor: palette.minionYellow } : null]}>
                 <Text style={styles.topBarText}>{status.isRun ? 'Sampling started' : 'Sampling idle'}</Text>
                 <Text style={styles.topBarText}>{status.isRun ? status.date.toTimeString() : null}</Text>
@@ -76,7 +87,8 @@ export const CurrentDataDisplay = () => {
 
                 {showRaw ? <RawDataDisplay someshit={someshit} /> : null}
 
-                {showSnrCharts ? <SnrBarCharts someshit={someshit} /> : null}
+                {showSnrBarCharts ? <SnrBarCharts someshit={someshit} /> : null}
+                {showSnrLineCharts ? <SnrLineCharts someshit={someshit} /> : null}
                 {showAttCharts ? <AttBarCharts someshit={someshit} /> : null}
                 {showFecCharts ? <FecBarCharts someshit={someshit} /> : null}
                 {showCrcCharts ? <CrcBarCharts someshit={someshit} /> : null}

@@ -33,6 +33,22 @@ export const FecBarCharts = (prop) => {
         }
     })
 
+    let fecd_dif_dataset = [];
+
+    for (let index = 0; index < fecd_dataset.length - 1; index++) {
+        if (fecd_dataset[index + 1] && fecd_dataset[index] && fecd_dataset[index].y && fecd_dataset[index + 1].y) {
+            fecd_dif_dataset.push({
+                x:fecd_dataset[index].x,
+                y:fecd_dataset[index + 1].y - fecd_dataset[index].y,
+            })
+        } else {
+           console.log(fecd_dataset[index], fecd_dataset[index + 1])
+        }
+        
+    }
+    console.log(fecd_dif_dataset)
+    
+
     let fecu_dataset = someshit.map(item => {
         if (!item.data.stats) {
             return null
@@ -163,7 +179,7 @@ export const FecBarCharts = (prop) => {
                 style={{ flex: 1 }}
                 data={{
                     dataSets: [{
-                        values: fecu_dataset,
+                        values: fecd_dif_dataset,
                         label: 'Upload',
                         config: {
                             color: processColor(palette.fluorescentBlue),
@@ -202,13 +218,14 @@ export const FecBarCharts = (prop) => {
 
                     left: {
                         enabled: false,
-                        axisMinimum: 0
+                        axisMinimum: 0,
 
                     },
                     right: {
                         enabled: true,
                         textColor: processColor("white"),
-                        axisMinimum: 0
+                        axisMinimum: 0,
+                        
                     }
                 }}
                 autoScaleMinMaxEnabled={false}

@@ -1,4 +1,4 @@
-import { ADD_SOMETHING, MODIFY_SOMETHING , DELETE_SOMETHING , TELNET_REQUEST , TELNET_REQUEST_SUCCEED , TELNET_REQUEST_FAILED , RUN , STOP , SET_CLIENT , SET_INTERVAL , SET_LOGIN , SET_PASSWORD , SET_IP } from './actionTypes';
+import { ADD_SOMETHING, MODIFY_SOMETHING , DELETE_SOMETHING , TELNET_REQUEST , TELNET_REQUEST_SUCCEED , TELNET_REQUEST_FAILED , RUN , STOP , SET_CLIENT , SET_INTERVAL , SET_LOGIN , SET_PASSWORD , SET_IP , DATAREQUEST_SUCCED , DATAREQUEST_FAILED } from './actionTypes';
 
 
 export const delete_something = (key) => (
@@ -77,3 +77,16 @@ export const telnet_request_failed = (data) => (
     }
 )
 
+export const data_request_succed = (data) => (
+    {
+        type: DATAREQUEST_SUCCED,
+        data: data
+    }
+)
+
+export const data_request_failed = (data) => (
+    {
+        type: DATAREQUEST_FAILED,
+        data: data
+    }
+)
