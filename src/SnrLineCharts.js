@@ -13,6 +13,11 @@ export const SnrLineCharts = (prop) => {
     const [yRange, setYrange] = useState(0.5);
     const [expandHeight, setExpandHeight] = useState(false);
 
+    // let nubmerdate =  Date.parse(new Date()) - new Date().getTimezoneOffset() * 60 * 1000;
+
+    // console.log(new Date(nubmerdate))
+
+    // console.log(new Date().getTimezoneOffset())
 
     let snrd_dataset = someshit.map(item => {
 
@@ -29,7 +34,7 @@ export const SnrLineCharts = (prop) => {
 
         return {
             y: item.data.stats ? Number(item.data.stats.snrd) : 0,
-            x: item.data ? Number(item.data.dateNumberic.toString().slice(4, 10)) : {}
+            x: item.data ? Number(item.data.dateNumberic.toString().slice(3,10)) - 19200 : {}
         }
     })
 
@@ -47,7 +52,7 @@ export const SnrLineCharts = (prop) => {
 
         return {
             y: item.data.stats ? Number(item.data.stats.snru) : 0,
-            x: item.data ? Number(item.data.dateNumberic.toString().slice(4, 10)) : {}
+            x: item.data ? Number(item.data.dateNumberic.toString().slice(3,10)) - 19200  : {}
         }
     })
 
@@ -100,12 +105,14 @@ export const SnrLineCharts = (prop) => {
                             drawCircleHole: false,
                             circleRadius: 1,
                         }
-                    }],
+                    }
+                ],
                     config: {
                         barWidth: 1,
                     }
                 }}
-
+                autoScaleMinMaxEnabled={true}
+                autoScaleMinMaxEnabled={false}
                 marker={{
                     enabled: false,
                     markerColor: processColor("white"),

@@ -35,13 +35,18 @@ export const IntervalDispatcher = (prop) => {
     let interval;
     let counterValue = 0;
 
+    // getNumbericDate = () => {
+    //     return Number(Date.parse(new Date()).toString().slice(4, 10))
+    // }
+
     tickHandler = () => {
         client.getStats()
         .then(a => {
-            let dateNumberic = Number(Date.parse(new Date()).toString().slice(4, 10));
-            dispatch(telnet_request_succed({ ...a, ...{ counter: counterValue, date: new Date(), dateNumberic:Date.parse(new Date()), rand:Math.round((Math.random() * 100)) } }))
 
-            // dispatch(data_request_succed({...a,dateNumberic}))
+            dispatch(telnet_request_succed({ ...a, ...{ counter: counterValue, date: new Date(), dateNumberic:Date.parse(new Date()) , rand:Math.round((Math.random() * 100)) } }))
+
+            // dispatch(data_request_succed({...a,dateNumberic:getNumbericDate()}))
+            
         })
         .catch(e => {
             dispatch(telnet_request_failed({ raw: e, ...{ counter: counterValue, date: new Date(), dateNumberic:Date.parse(new Date()) } }))

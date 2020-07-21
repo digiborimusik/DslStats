@@ -29,7 +29,7 @@ export const AttBarCharts = (prop) => {
 
         return {
             y: item.data.stats ? Number(item.data.stats.attnd) : 0,
-            x: item.data ? Number(item.data.dateNumberic.toString().slice(4, 10)) : {}
+            x: item.data ? Number(item.data.dateNumberic.toString().slice(3,10)) - 19200  : {}
         }
     })
 
@@ -47,7 +47,7 @@ export const AttBarCharts = (prop) => {
 
         return {
             y: item.data.stats ? Number(item.data.stats.attnu) : 0,
-            x: item.data ? Number(item.data.dateNumberic.toString().slice(4, 10)) : {}
+            x: item.data ? Number(item.data.dateNumberic.toString().slice(3,10)) - 19200  : {}
         }
     })
 

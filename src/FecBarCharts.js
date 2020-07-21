@@ -29,24 +29,24 @@ export const FecBarCharts = (prop) => {
 
         return {
             y: item.data.stats ? Number(item.data.stats.fecd) : 0,
-            x: item.data ? Number(item.data.dateNumberic.toString().slice(4, 10)) : {}
+            x: item.data ? Number(item.data.dateNumberic.toString().slice(3,10)) - 19200  : {}
         }
     })
 
-    let fecd_dif_dataset = [];
+    // let fecd_dif_dataset = [];
 
-    for (let index = 0; index < fecd_dataset.length - 1; index++) {
-        if (fecd_dataset[index + 1] && fecd_dataset[index] && fecd_dataset[index].y && fecd_dataset[index + 1].y) {
-            fecd_dif_dataset.push({
-                x:fecd_dataset[index].x,
-                y:fecd_dataset[index + 1].y - fecd_dataset[index].y,
-            })
-        } else {
-           console.log(fecd_dataset[index], fecd_dataset[index + 1])
-        }
+    // for (let index = 0; index < fecd_dataset.length - 1; index++) {
+    //     if (fecd_dataset[index + 1] && fecd_dataset[index] && fecd_dataset[index].y && fecd_dataset[index + 1].y) {
+    //         fecd_dif_dataset.push({
+    //             x:fecd_dataset[index].x,
+    //             y:fecd_dataset[index + 1].y - fecd_dataset[index].y,
+    //         })
+    //     } else {
+    //        console.log(fecd_dataset[index], fecd_dataset[index + 1])
+    //     }
         
-    }
-    console.log(fecd_dif_dataset)
+    // }
+    // console.log(fecd_dif_dataset)
     
 
     let fecu_dataset = someshit.map(item => {
@@ -63,7 +63,7 @@ export const FecBarCharts = (prop) => {
 
         return {
             y: item.data.stats ? Number(item.data.stats.fecu) : 0,
-            x: item.data ? Number(item.data.dateNumberic.toString().slice(4, 10)) : {}
+            x: item.data ? Number(item.data.dateNumberic.toString().slice(3,10)) - 19200  : {}
         }
     })
 
@@ -179,7 +179,7 @@ export const FecBarCharts = (prop) => {
                 style={{ flex: 1 }}
                 data={{
                     dataSets: [{
-                        values: fecd_dif_dataset,
+                        values: fecu_dataset,
                         label: 'Upload',
                         config: {
                             color: processColor(palette.fluorescentBlue),

@@ -1,13 +1,13 @@
 import { createStore, combineReducers} from 'redux';
 import testReducer from './reducers/testReducer';
-import largeDataReducer from './reducers/largeDataReducer';
+import DataReducer from './reducers/DataReducer';
 
 
 
 
 const combinedReducer = combineReducers({
     testReducer,
-    largeDataReducer
+    DataReducer
 })
 
 

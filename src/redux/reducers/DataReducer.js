@@ -1,6 +1,7 @@
 import { DATAREQUEST_SUCCED, DATAREQUEST_FAILED } from '../actionTypes';
 
 const initialState = {
+    
     snrd: [],
     snru: [],
     attnd: [],
@@ -12,7 +13,7 @@ const initialState = {
 }
 
 
-const largeDataReducer = (state = initialState, action) => {
+const DataReducer = (state = initialState, action) => {
     // console.log(state)
 
     switch (action.type) {
@@ -69,4 +70,4 @@ const largeDataReducer = (state = initialState, action) => {
 }
 
 
-export default largeDataReducer;
+export default DataReducer;
