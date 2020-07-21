@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Modal, FlatList } from 'react-native';
 import palette from './modules/colorPalette';
-
+import { useSelector } from 'react-redux';
 
 export const ParsedStatsBar = (prop) => {
-    data = prop.someshit[prop.someshit.length - 1] ? prop.someshit[prop.someshit.length - 1].data : null;
-    stats = prop.someshit[prop.someshit.length - 1] ? prop.someshit[prop.someshit.length - 1].data.stats : null;
+    const someshit = useSelector(state => state.testReducer.someshitList);
+    
+    data = someshit[someshit.length - 1] ? someshit[someshit.length - 1].data : null;
+    stats = someshit[someshit.length - 1] ? someshit[someshit.length - 1].data.stats : null;
     const [showSNR, setShowSNR] = useState(false);
     const [showLog, setShowLog] = useState(false);
 

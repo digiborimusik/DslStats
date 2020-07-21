@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Modal, FlatList, ScrollView } from 'react-native';
 import palette from './modules/colorPalette';
+import { useSelector } from 'react-redux';
 
 import { TheButton } from './TheButton'
 
 export const RawDataDisplay = (prop) => {
 
-    const someshit = prop.someshit
+    // const someshit = prop.someshit
+
+    const someshit = useSelector(state => state.testReducer.someshitList);
 
     const getData = () => {
-        const data = [...prop.someshit]
-        console.log(data)
+        const data = [...someshit]
+        // console.log(data)
         return data.reverse()
     }
 

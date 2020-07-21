@@ -35,9 +35,9 @@ export const IntervalDispatcher = (prop) => {
     let interval;
     let counterValue = 0;
 
-    // getNumbericDate = () => {
-    //     return Number(Date.parse(new Date()).toString().slice(4, 10))
-    // }
+    getNumbericDate = () => {
+        return Number(Date.parse(new Date()).toString().slice(3, 10)) - 19200
+    }
 
     tickHandler = () => {
         client.getStats()
@@ -45,7 +45,7 @@ export const IntervalDispatcher = (prop) => {
 
             dispatch(telnet_request_succed({ ...a, ...{ counter: counterValue, date: new Date(), dateNumberic:Date.parse(new Date()) , rand:Math.round((Math.random() * 100)) } }))
 
-            // dispatch(data_request_succed({...a,dateNumberic:getNumbericDate()}))
+            dispatch(data_request_succed({...a,dateNumberic:getNumbericDate()}))
             
         })
         .catch(e => {

@@ -7,13 +7,12 @@ import { BarChart } from 'react-native-charts-wrapper';
 
 import ExpandSvg from "./svg/expand.svg";
 
-export const FecBarCharts = () => {
-    const fecd = useSelector(state => state.DataReducer.fecd);
-    const fecu = useSelector(state => state.DataReducer.fecu);
+export const FecDifCharts = () => {
 
+    const fecd = useSelector(state => state.DataReducer.fecddif);
+    const fecu = useSelector(state => state.DataReducer.fecudif);
     const [yRange, setYrange] = useState(0.5);
     const [expandHeight, setExpandHeight] = useState(false);
-
 
     const fecd_dataset = fecd.map(item => {
 
@@ -25,7 +24,7 @@ export const FecBarCharts = () => {
         }
 
         return {
-            y: item.y,
+            y: item.y <= 0 ? 0 : item.y,
             x: item.x
         }
     })
@@ -41,7 +40,7 @@ export const FecBarCharts = () => {
         }
 
         return {
-            y: item.y,
+            y: item.y <= 0 ? 0 : item.y,
             x: item.x
         }
     })
@@ -49,14 +48,14 @@ export const FecBarCharts = () => {
     return (
         <View style={[
             { backgroundColor: palette.richBlack },
-            expandHeight ? { height: 400 } : { height: 300 }
+            expandHeight ? { height: 300 } : { height: 200 }
         ]}>
             <View style={{ flexDirection: 'row', padding: 16 }}>
                 <View style={{ flexDirection: 'row', flex: 1 }} >
                     <Text style={{
                         color: palette.babyPowder,
                         fontWeight: 'bold'
-                    }}>RS CORRECTABLE / FEC</Text>
+                    }}>RS Corr / FEC DIFFERENCE</Text>
                 </View>
                 <TouchableOpacity 
                 
@@ -74,7 +73,8 @@ export const FecBarCharts = () => {
             <BarChart
                 style={{ flex: 1 }}
                 data={{
-                    dataSets: [{
+                    dataSets: [
+                        {
                         values: fecd_dataset,
                         label: 'Download',
                         config: {
@@ -82,7 +82,17 @@ export const FecBarCharts = () => {
                             valueTextColor: processColor(palette.babyPowder),
                             drawValues: true
                         }
-                    }],
+                    },
+                    {
+                        values: fecu_dataset,
+                        label: 'Upload',
+                        config: {
+                            color: processColor(palette.fluorescentBlue),
+                            valueTextColor: processColor(palette.babyPowder),
+                            drawValues: true
+                        }
+                    }
+                ],
                     config: {
                         barWidth: 1,
                     }
@@ -154,7 +164,7 @@ export const FecBarCharts = () => {
                 maxVisibleValueCount={50}
 
             />
-            <BarChart
+            {/* <BarChart
                 style={{ flex: 1 }}
                 data={{
                     dataSets: [{
@@ -236,7 +246,7 @@ export const FecBarCharts = () => {
                 doubleTapToZoomEnabled={false}
                 maxVisibleValueCount={50}
 
-            />
+            /> */}
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', padding: 8 }}>
                     <View style={{height:10,width:10,marginLeft:8,backgroundColor:palette.minionYellow}} ></View>

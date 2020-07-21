@@ -9,20 +9,22 @@ import { ParsedStatsBar } from './ParsedStatsBar'
 // import { YoglerBar } from './YoglerBar'
 import { SnrBarCharts } from './SnrBarCharts'
 import { SnrLineCharts } from './SnrLineCharts'
-import { AttBarCharts } from './AttBarCharts'
-import { FecBarCharts } from './FecBarCharts'
-import { CrcBarCharts } from './CrcBarCharts'
+import { FecDifCharts } from './FecDifCharts'
+import { CrcDifCharts } from './CrcDifCharts'
+import { AttLineCharts } from './AttLineCharts'
 
 export const CurrentDataDisplay = () => {
-    const someshit = useSelector(state => state.testReducer.someshitList);
+    // const someshit = useSelector(state => state.testReducer.someshitList);
     const status = useSelector(state => state.testReducer.status);
 
     const [showRaw, setShowRaw] = useState(false);
     const [showSnrBarCharts, setShowSnrBarCharts] = useState(false);
     const [showSnrLineCharts, setShowSnrLineCharts] = useState(true);
-    const [showAttCharts, setShowAttCharts] = useState(false);
-    const [showFecCharts, setShowFecCharts] = useState(true);
-    const [showCrcCharts, setShowCrcCharts] = useState(false);
+
+    const [showFecDifCharts, setShowFecDifCharts] = useState(true);
+    const [showCrcDifCharts, setShowCrcDifCharts] = useState(false);
+
+    const [showAttLineCharts, setShowAttLineCharts] = useState(false);
 
     const Yoggler = (prop) => {
 
@@ -48,24 +50,20 @@ export const CurrentDataDisplay = () => {
 
     const YoglerBar = () => {
         return (
-            <ScrollView horizontal={true} >
+            // <ScrollView horizontal={true} >
                 <View style={{
                     flexDirection: 'row',
-                    width:600,
+                    // width:600,
                     // backgroundColor:'gray',
                     justifyContent: 'space-around'
                 }}>
                     <Yoggler name={'RAW'} active={showRaw} action={() => setShowRaw(!showRaw)} />
-                    <Yoggler name={'S-Bar'} active={showSnrBarCharts} action={() => setShowSnrBarCharts(!showSnrBarCharts)} />
-                    <Yoggler name={'S-Line'} active={showSnrLineCharts} action={() => setShowSnrLineCharts(!showSnrLineCharts)} />
-                    <Yoggler name={'A-Bar'} active={showAttCharts} action={() => setShowAttCharts(!showAttCharts)} />
-                    <Yoggler name={'F-Bar'} active={showFecCharts} action={() => setShowFecCharts(!showFecCharts)} />
-                    <Yoggler name={'C-Bar'} active={showCrcCharts} action={() => setShowCrcCharts(!showCrcCharts)} />
-                    <Yoggler name={'A-Line'} active={showAttCharts} action={() => setShowAttCharts(!showAttCharts)} />
-                    <Yoggler name={'F-Line'} active={showFecCharts} action={() => setShowFecCharts(!showFecCharts)} />
-                    <Yoggler name={'C-Line'} active={showCrcCharts} action={() => setShowCrcCharts(!showCrcCharts)} />
+                    <Yoggler name={'SNRM-Line'} active={showSnrLineCharts} action={() => setShowSnrLineCharts(!showSnrLineCharts)} />
+                    <Yoggler name={'FEC-Dif'} active={showFecDifCharts} action={() => setShowFecDifCharts(!showFecDifCharts)} />
+                    <Yoggler name={'CRC-Dif'} active={showCrcDifCharts} action={() => setShowCrcDifCharts(!showCrcDifCharts)} />
+                    <Yoggler name={'ATT-Line'} active={showAttLineCharts} action={() => setShowAttLineCharts(!showAttLineCharts)} />
                 </View>
-            </ScrollView>
+            // </ScrollView>
 
         )
     }
@@ -78,20 +76,17 @@ export const CurrentDataDisplay = () => {
                 <Text style={styles.topBarText}>{status.isRun ? status.date.toTimeString() : null}</Text>
             </View>
             <ScrollView>
-                <ParsedStatsBar someshit={someshit} />
+                <ParsedStatsBar />
 
                 <YoglerBar />
 
+                {showRaw ? <RawDataDisplay /> : null}
 
-
-
-                {showRaw ? <RawDataDisplay someshit={someshit} /> : null}
-
-                {showSnrBarCharts ? <SnrBarCharts someshit={someshit} /> : null}
-                {showSnrLineCharts ? <SnrLineCharts someshit={someshit} /> : null}
-                {showAttCharts ? <AttBarCharts someshit={someshit} /> : null}
-                {showFecCharts ? <FecBarCharts someshit={someshit} /> : null}
-                {showCrcCharts ? <CrcBarCharts someshit={someshit} /> : null}
+                {showSnrBarCharts ? <SnrBarCharts  /> : null}
+                {showSnrLineCharts ? <SnrLineCharts  /> : null}
+                {showFecDifCharts ? <FecDifCharts  /> : null}
+                {showCrcDifCharts ? <CrcDifCharts  /> : null}
+                {showAttLineCharts? <AttLineCharts  /> : null}
 
             </ScrollView>
         </View>

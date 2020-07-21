@@ -8,51 +8,41 @@ import { LineChart } from 'react-native-charts-wrapper';
 import ExpandSvg from "./svg/expand.svg";
 
 export const SnrLineCharts = (prop) => {
-    const someshit = prop.someshit
-    // const someshit = useSelector(state => state.testReducer.someshitList);
+
+    const snrd = useSelector(state => state.DataReducer.snrd);
+    const snru = useSelector(state => state.DataReducer.snru);
+
     const [yRange, setYrange] = useState(0.5);
     const [expandHeight, setExpandHeight] = useState(false);
 
-    // let nubmerdate =  Date.parse(new Date()) - new Date().getTimezoneOffset() * 60 * 1000;
 
-    // console.log(new Date(nubmerdate))
+    const snrd_dataset = snrd.map(item => {
 
-    // console.log(new Date().getTimezoneOffset())
-
-    let snrd_dataset = someshit.map(item => {
-
-        if (!item.data.stats) {
-            return null
-        }
-
-        let numA = Number(someshit[someshit.length - 1].data.dateNumberic.toString().slice(4, 10)) - yRange * 60;
-        let numB = Number(item.data.dateNumberic.toString().slice(4, 10))
+        let numA = Number(snrd[snrd.length - 1].x) - yRange * 60;
+        let numB = Number(item.x)
 
         if (numA > numB) {
             return
         }
 
         return {
-            y: item.data.stats ? Number(item.data.stats.snrd) : 0,
-            x: item.data ? Number(item.data.dateNumberic.toString().slice(3,10)) - 19200 : {}
+            y: item.y,
+            x: item.x
         }
     })
 
-    let snru_dataset = someshit.map(item => {
-        if (!item.data.stats) {
-            return null
-        }
+    const snru_dataset = snru.map(item => {
 
-        let numA = Number(someshit[someshit.length - 1].data.dateNumberic.toString().slice(4, 10)) - yRange * 60;
-        let numB = Number(item.data.dateNumberic.toString().slice(4, 10))
+        let numA = Number(snru[snru.length - 1].x) - yRange * 60;
+        let numB = Number(item.x)
 
         if (numA > numB) {
             return
         }
 
         return {
-            y: item.data.stats ? Number(item.data.stats.snru) : 0,
-            x: item.data ? Number(item.data.dateNumberic.toString().slice(3,10)) - 19200  : {}
+            y: item.y,
+            x: item.x
         }
     })
 
@@ -111,6 +101,7 @@ export const SnrLineCharts = (prop) => {
                         barWidth: 1,
                     }
                 }}
+                chartDescription={{ text: "SNR", textColor: processColor(palette.babyPowder) }}
                 autoScaleMinMaxEnabled={true}
                 autoScaleMinMaxEnabled={false}
                 marker={{

@@ -3,21 +3,22 @@ import { StyleSheet, View, TouchableOpacity, Text, Dimensions, processColor, Lay
 import { connect, useDispatch, useSelector } from 'react-redux';
 import palette from './modules/colorPalette';
 
-import { BarChart } from 'react-native-charts-wrapper';
+import { LineChart } from 'react-native-charts-wrapper';
 
 import ExpandSvg from "./svg/expand.svg";
 
-export const FecBarCharts = () => {
-    const fecd = useSelector(state => state.DataReducer.fecd);
-    const fecu = useSelector(state => state.DataReducer.fecu);
+export const AttLineCharts = (prop) => {
+
+    const attd = useSelector(state => state.DataReducer.attnd);
+    const attu = useSelector(state => state.DataReducer.attnu);
 
     const [yRange, setYrange] = useState(0.5);
     const [expandHeight, setExpandHeight] = useState(false);
 
 
-    const fecd_dataset = fecd.map(item => {
+    const attd_dataset = attd.map(item => {
 
-        let numA = Number(fecd[fecd.length - 1].x) - yRange * 60;
+        let numA = Number(attd[attd.length - 1].x) - yRange * 60;
         let numB = Number(item.x)
 
         if (numA > numB) {
@@ -29,11 +30,10 @@ export const FecBarCharts = () => {
             x: item.x
         }
     })
-    
 
-    const fecu_dataset = fecu.map(item => {
+    const attu_dataset = attu.map(item => {
 
-        let numA = Number(fecu[fecu.length - 1].x) - yRange * 60;
+        let numA = Number(attu[attu.length - 1].x) - yRange * 60;
         let numB = Number(item.x)
 
         if (numA > numB) {
@@ -49,45 +49,61 @@ export const FecBarCharts = () => {
     return (
         <View style={[
             { backgroundColor: palette.richBlack },
-            expandHeight ? { height: 400 } : { height: 300 }
+            expandHeight ? { height: 300 } : { height: 200 }
         ]}>
             <View style={{ flexDirection: 'row', padding: 16 }}>
                 <View style={{ flexDirection: 'row', flex: 1 }} >
                     <Text style={{
                         color: palette.babyPowder,
                         fontWeight: 'bold'
-                    }}>RS CORRECTABLE / FEC</Text>
+                    }}>SIGNAL ATTENUATION</Text>
                 </View>
-                <TouchableOpacity 
-                
-                onPress={() => setExpandHeight(!expandHeight)} 
-                style={{
-                    flexDirection: 'row',
-                     justifyContent: 'flex-end',
-                      alignItems: 'center' 
-                    }} 
-                
+                <TouchableOpacity
+
+                    onPress={() => setExpandHeight(!expandHeight)}
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'flex-end',
+                        alignItems: 'center'
+                    }}
+
                 >
                     <ExpandSvg fill={palette.fluorescentBlue} style={{ height: 12, width: 12 }} />
                 </TouchableOpacity>
             </View>
-            <BarChart
+            <LineChart
                 style={{ flex: 1 }}
                 data={{
                     dataSets: [{
-                        values: fecd_dataset,
+                        values: attd_dataset,
                         label: 'Download',
                         config: {
                             color: processColor(palette.minionYellow),
-                            valueTextColor: processColor(palette.babyPowder),
-                            drawValues: true
+                            valueTextColor: processColor(palette.minionYellow),
+                            drawValues: true,
+                            drawCircleHole: false,
+                            circleRadius: 1,
                         }
-                    }],
+                    },
+                    {
+                        values: attu_dataset,
+                        label: 'UPLOAD',
+                        config: {
+                            color: processColor(palette.pacificBlue),
+                            valueTextColor: processColor(palette.babyPowder),
+                            drawValues: true,
+                            drawCircleHole: false,
+                            circleRadius: 1,
+                        }
+                    }
+                ],
                     config: {
                         barWidth: 1,
                     }
                 }}
-                chartDescription={{ text: "FEC", textColor: processColor(palette.babyPowder) }}
+                chartDescription={{ text: "ATT", textColor: processColor(palette.babyPowder) }}
+                autoScaleMinMaxEnabled={true}
+                autoScaleMinMaxEnabled={false}
                 marker={{
                     enabled: false,
                     markerColor: processColor("white"),
@@ -140,7 +156,9 @@ export const FecBarCharts = () => {
                     yEntrySpace: 5,
                     formToTextSpace: 5,
                     wordWrapEnabled: true,
-                    maxSizePercent: 0.5
+                    maxSizePercent: 0.5,
+                    verticalAlignment: "BOTTOM",
+                    horizontalAlignment: "RIGHT",
                 }}
                 gridBackgroundColor={processColor('#ffffff')}
                 drawBarShadow={false}
@@ -151,92 +169,11 @@ export const FecBarCharts = () => {
                 scaleYEnabled={false}
                 pinchZoom={false}
                 doubleTapToZoomEnabled={false}
-                maxVisibleValueCount={50}
+                maxVisibleValueCount={100}
+                noDataText={'NO DATA'}
 
             />
-            <BarChart
-                style={{ flex: 1 }}
-                data={{
-                    dataSets: [{
-                        values: fecu_dataset,
-                        label: 'Upload',
-                        config: {
-                            color: processColor(palette.fluorescentBlue),
-                            valueTextColor: processColor(palette.babyPowder),
-                            drawValues: true
-                        }
-                    }],
-                    config: {
-                        barWidth: 1,
-                    }
-                }}
-                chartDescription={{ text: "UPLOAD FEC", textColor: processColor("black") }}
-                marker={{
-                    enabled: false,
-                    markerColor: processColor("white"),
-                    textColor: processColor("black")
-                }}
-                xAxis={{
-                    enabled: true,
-                    granularity: 0,
-                    drawLabels: true,
-                    position: "BOTTOM",
-                    drawAxisLine: true,
-                    drawGridLines: true,
-                    fontFamily: "HelveticaNeue-Medium",
-                    fontWeight: "normal",
-                    textSize: 10,
-                    textColor: processColor("white"),
-                    valueFormatter: 'date',
-                    valueFormatterPattern: "HH:mm:ss",
-                    since: 0,
-                    timeUnit: "SECONDS"
 
-                }}
-                yAxis={{
-
-                    left: {
-                        enabled: false,
-                        axisMinimum: 0,
-
-                    },
-                    right: {
-                        enabled: true,
-                        textColor: processColor("white"),
-                        axisMinimum: 0,
-                        
-                    }
-                }}
-                autoScaleMinMaxEnabled={false}
-                animation={{
-                    durationX: 500,
-                    durationY: 250,
-                    easingY: "EaseInOutQuart"
-                }}
-                legend={{
-                    enabled: false,
-                    textColor: processColor(palette.babyPowder),
-                    textSize: 12,
-                    form: 'SQUARE',
-                    formSize: 10,
-                    xEntrySpace: 10,
-                    yEntrySpace: 5,
-                    formToTextSpace: 5,
-                    wordWrapEnabled: true,
-                    maxSizePercent: 0.5
-                }}
-                gridBackgroundColor={processColor('#ffffff')}
-                drawBarShadow={false}
-                drawValueAboveBar={true}
-                drawHighlightArrow={false}
-                highlights={[]}
-                scaleXEnabled={true}
-                scaleYEnabled={false}
-                pinchZoom={false}
-                doubleTapToZoomEnabled={false}
-                maxVisibleValueCount={50}
-
-            />
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', padding: 8 }}>
                     <View style={{height:10,width:10,marginLeft:8,backgroundColor:palette.minionYellow}} ></View>
@@ -275,6 +212,7 @@ export const FecBarCharts = () => {
                     </TouchableOpacity>
                 </View>
             </View>
+
         </View>
     )
 }
