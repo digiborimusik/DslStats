@@ -6,7 +6,6 @@ import { add_something, telnet_request } from './redux/actions';
 
 import { RawDataDisplay } from './RawDataDisplay'
 import { ParsedStatsBar } from './ParsedStatsBar'
-// import { YoglerBar } from './YoglerBar'
 import { SnrBarCharts } from './SnrBarCharts'
 import { SnrLineCharts } from './SnrLineCharts'
 import { FecDifCharts } from './FecDifCharts'

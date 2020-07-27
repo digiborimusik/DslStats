@@ -49,19 +49,31 @@ module.exports = class Dlink2640Client extends Client {
     
         if(status == 'Showtime'){
             stats = {
-                maxUpSpd:arr[4][4],maxDwSpd:arr[4][9],
-                UpSpd:arr[5][5],DwSpd:arr[5][10],
+                maxUpSpd:Number(arr[4][4]),
+                maxDwSpd:Number(arr[4][9]),
+                UpSpd:Number(arr[5][5]),
+                DwSpd:Number(arr[5][10]),
                 mode:arr[8][1],
-                snrd:arr[14][2],snru:arr[14][3],
-                attnd:arr[15][1],attnu:arr[15][2],
-                fecd:arr[34][1],fecu:arr[34][2],
-                crcd:arr[35][1],crcu:arr[35][2],
-                hecD:arr[38][1],hecU:arr[38][2],
-                ocdD:arr[39][1],ocdU:arr[39][2],
-                lcdD:arr[40][1],lcdU:arr[40][2],
-                esD:arr[46][1],esU:arr[46][2],
-                sesD:arr[47][1],sesU:arr[47][2],
-                uasD:arr[48][1],uasU:arr[48][2]
+                snrd:Number(arr[14][2]),
+                snru:Number(arr[14][3]),
+                attnd:Number(arr[15][1]),
+                attnu:Number(arr[15][2]),
+                fecd:Number(arr[34][1]),
+                fecu:Number(arr[34][2]),
+                crcd:Number(arr[35][1]),
+                crcu:Number(arr[35][2]),
+                hecD:Number(arr[38][1]),
+                hecU:Number(arr[38][2]),
+                ocdD:Number(arr[39][1]),
+                ocdU:Number(arr[39][2]),
+                lcdD:Number(arr[40][1]),
+                lcdU:Number(arr[40][2]),
+                esD:Number(arr[46][1]),
+                esU:Number(arr[46][2]),
+                sesD:Number(arr[47][1]),
+                sesU:Number(arr[47][2]),
+                uasD:Number(arr[48][1]),
+                uasU:Number(arr[48][2])
             }
         }
     
