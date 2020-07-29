@@ -9,10 +9,11 @@ export const RawDataDisplay = (prop) => {
 
     // const someshit = prop.someshit
 
-    const someshit = useSelector(state => state.testReducer.someshitList);
+    // const someshit = useSelector(state => state.testReducer.someshitList);
+    const allShit = useSelector(state => state.DataReducer.allShit);
 
     const getData = () => {
-        const data = [...someshit]
+        const data = [...allShit]
         // console.log(data)
         return data.reverse()
     }
@@ -24,11 +25,12 @@ export const RawDataDisplay = (prop) => {
     }
 
     const ItemRender = (prop) => {
+        
         return (
             <Text style={styles.resultAreaText}>
                 {
-                    prop.item.data.status + ' ' + prop.item.data.date.toString().substr(0, 25) + '\n' +
-                    prop.item.data.raw + '\n'
+                    'Sample number: ' + prop.item.counter + '  /  ' + prop.item.date.toString().substr(0, 24) + '\n' + 
+                    prop.item.status + prop.item.raw
                 }
             </Text>
         )
@@ -62,7 +64,7 @@ export const RawDataDisplay = (prop) => {
                     <TouchableOpacity
                         onPress={onPressHandler}
                         underlayColor={palette.minionYellow} >
-                        {someshit.length ? <ItemRender item={someshit[someshit.length - 1]} /> : <Text style={styles.resultAreaText} >No data</Text>}
+                        {allShit.length ? <ItemRender item={allShit[allShit.length - 1]} /> : <Text style={styles.resultAreaText} >No data</Text>}
                     </TouchableOpacity>
                 </View>
             </View>

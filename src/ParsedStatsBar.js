@@ -2,78 +2,77 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Modal, FlatList } from 'react-native';
 import palette from './modules/colorPalette';
 import { useSelector } from 'react-redux';
+import { last } from 'lodash';
 
 export const ParsedStatsBar = (prop) => {
     const someshit = useSelector(state => state.testReducer.someshitList);
-    
-    data = someshit[someshit.length - 1] ? someshit[someshit.length - 1].data : null;
-    stats = someshit[someshit.length - 1] ? someshit[someshit.length - 1].data.stats : null;
-    const [showSNR, setShowSNR] = useState(false);
-    const [showLog, setShowLog] = useState(false);
+    const lastShit = useSelector(state => state.DataReducer.lastShit);
+    // data = someshit[someshit.length - 1] ? someshit[someshit.length - 1].data : null;
+    // stats = someshit[someshit.length - 1] ? someshit[someshit.length - 1].data.stats : null;
 
     return (
         <>
 
             <View style={{ padding: 4 }}>
 
-                <Text style={{ color: palette.babyPowder }}>xDsl status: {data ? data.status : '---'} </Text>
-                <Text style={{ color: palette.babyPowder }}>Mode: {stats ? stats.mode : '---'}</Text>
-                <Text style={{ color: palette.babyPowder }}>Sample number: {data ? data.counter : '---'}</Text>
-                <Text style={{ color: palette.babyPowder }}>Last sync: {data ? data.date.toString().substr(0, 25) : '---'}</Text>
+                <Text style={{ color: palette.babyPowder }}>xDsl status: {lastShit.isSucced ? lastShit.status : '---'} </Text>
+                <Text style={{ color: palette.babyPowder }}>Mode: {lastShit.isSucced ? lastShit.stats.mode : '---'}</Text>
+                <Text style={{ color: palette.babyPowder }}>Sample number: {lastShit.counter ? lastShit.counter : '---'}</Text>
+                <Text style={{ color: palette.babyPowder }}>Last sync: {lastShit.date ? lastShit.date.toString().substr(0, 25) : '---'}</Text>
             </View>
 
             <View style={styles.container}>
                 <View style={styles.sides}>
                     <Text style={styles.sideHeading}>Downlink</Text>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.DwSpd : '---'}</Text>
+                        <Text style={styles.statValue}>{lastShit.isSucced ? lastShit.stats.DwSpd : '---'}</Text>
                         <Text style={styles.statText}>SPEED</Text>
                     </View>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.maxDwSpd : '---'}</Text>
+                        <Text style={styles.statValue}>{lastShit.isSucced ? lastShit.stats.maxDwSpd : '---'}</Text>
                         <Text style={styles.statText}>MAX</Text>
                     </View>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.snrd : '---'}</Text>
+                        <Text style={styles.statValue}>{lastShit.isSucced ? lastShit.stats.snrd : '---'}</Text>
                         <Text style={styles.statText}>SNR</Text>
                     </View>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.attnd : '---'}</Text>
+                        <Text style={styles.statValue}>{lastShit.isSucced ? lastShit.stats.attnd : '---'}</Text>
                         <Text style={styles.statText}>ATT</Text>
                     </View>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.fecd : '---'}</Text>
+                        <Text style={styles.statValue}>{lastShit.isSucced ? lastShit.stats.fecd : '---'}</Text>
                         <Text style={styles.statText}>FEC</Text>
                     </View>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.crcd : '---'}</Text>
+                        <Text style={styles.statValue}>{lastShit.isSucced ? lastShit.stats.crcd : '---'}</Text>
                         <Text style={styles.statText}>CRC</Text>
                     </View>
                 </View>
                 <View style={styles.sides}>
                     <Text style={styles.sideHeading}>Uplink</Text>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.UpSpd : '---'}</Text>
+                        <Text style={styles.statValue}>{lastShit.isSucced ? lastShit.stats.UpSpd : '---'}</Text>
                         <Text style={styles.statText}>SPEED</Text>
                     </View>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.maxUpSpd : '---'}</Text>
+                        <Text style={styles.statValue}>{lastShit.isSucced ? lastShit.stats.maxUpSpd : '---'}</Text>
                         <Text style={styles.statText}>MAX</Text>
                     </View>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.snru : '---'}</Text>
+                        <Text style={styles.statValue}>{lastShit.isSucced ? lastShit.stats.snru : '---'}</Text>
                         <Text style={styles.statText}>SNR</Text>
                     </View>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.attnu : '---'}</Text>
+                        <Text style={styles.statValue}>{lastShit.isSucced ? lastShit.stats.attnu : '---'}</Text>
                         <Text style={styles.statText}>ATT</Text>
                     </View>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.fecu : '---'}</Text>
+                        <Text style={styles.statValue}>{lastShit.isSucced ? lastShit.stats.fecu : '---'}</Text>
                         <Text style={styles.statText}>FEC</Text>
                     </View>
                     <View style={styles.statRow}>
-                        <Text style={styles.statValue}>{stats ? stats.crcu : '---'}</Text>
+                        <Text style={styles.statValue}>{lastShit.isSucced ? lastShit.stats.crcu : '---'}</Text>
                         <Text style={styles.statText}>CRC</Text>
                     </View>
                 </View>

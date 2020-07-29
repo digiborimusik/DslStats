@@ -3,11 +3,9 @@ import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button, To
 import palette from './modules/colorPalette';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { add_something, telnet_request, run, stop, set_client } from './redux/actions';
-import { IntervalDispatcher } from './IntervalDispatcher';
-import { ModalSettings } from './ModalSettings';
 import { TheButton } from './TheButton';
 
-const clients = ['Dlink2640u', 'MiNano']
+const clients = ['Dlink2640u', 'MiNano' , 'SimulatedCli']
 
 export const ClientPicker = () => {
 

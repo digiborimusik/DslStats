@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button, TouchableOpacity } from 'react-native';
-import {useDispatch, useSelector } from 'react-redux';
-import { add_something, telnet_request, run, stop, set_client, telnet_request_succed, telnet_request_failed, data_request_succed , data_request_failed } from './redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { add_something, telnet_request, run, stop, set_client, telnet_request_succed, telnet_request_failed, data_request_succed, data_request_failed } from './redux/actions';
 
 
 const LineStatsLoader = require('./modules/LineStatsLoader')
 const Dlink2640Client = require('./modules/Dlink2640Client')
 const MiNanoClient = require('./modules/MiNanoClient')
+const SimulatedCli = require('./modules/SimulatedCli')
 
 
 export const IntervalDispatcher = (prop) => {
@@ -20,17 +21,20 @@ export const IntervalDispatcher = (prop) => {
 
     switch (prop.client) {
         case 'Dlink2640u':
-            client = new LineStatsLoader(Dlink2640Client,{ip,login,password})
+            client = new LineStatsLoader(Dlink2640Client, { ip, login, password })
             break;
         case 'MiNano':
             client = new LineStatsLoader(MiNanoClient)
+            break;
+        case 'SimulatedCli':
+            client = new SimulatedCli()
             break;
         default:
             client = 'asd'
             break;
     }
 
-    
+
     // const [counterValue, setCounterValue] = useState(1);
     let interval;
     let counterValue = 0;
@@ -41,16 +45,18 @@ export const IntervalDispatcher = (prop) => {
 
     tickHandler = () => {
         client.getStats()
-        .then(a => {
+            .then(a => {
 
-            dispatch(telnet_request_succed({ ...a, ...{ counter: counterValue, date: new Date(), dateNumberic:Date.parse(new Date()) , rand:Math.round((Math.random() * 100)) } }))
+                // dispatch(telnet_request_succed({ ...a, ...{ counter: counterValue, date: new Date(), dateNumberic: Date.parse(new Date()), rand: Math.round((Math.random() * 100)) } }))
 
-            dispatch(data_request_succed({...a,dateNumberic:getNumbericDate()}))
-            
-        })
-        .catch(e => {
-            dispatch(telnet_request_failed({ raw: e, ...{ counter: counterValue, date: new Date(), dateNumberic:Date.parse(new Date()) } }))
-        })
+                dispatch(data_request_succed({ ...a, dateNumberic: getNumbericDate(), counter: counterValue, date: new Date() }))
+
+            })
+            .catch(e => {
+                // dispatch(telnet_request_failed({ raw: e, ...{ counter: counterValue, date: new Date(), dateNumberic: Date.parse(new Date()) } }))
+
+                dispatch(data_request_succed({ raw:e.toString(), dateNumberic: getNumbericDate(), counter: counterValue, date: new Date() }))
+            })
         // setCounterValue(counterValue + 1)
         counterValue += 1;
 

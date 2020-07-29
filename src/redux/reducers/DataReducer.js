@@ -1,8 +1,10 @@
 import { DATAREQUEST_SUCCED, DATAREQUEST_FAILED } from '../actionTypes';
-import { times } from 'lodash';
 
 const initialState = {
-
+    allShit:[],
+    lastShit:{
+        isSucced:false
+    },
     snrd: [],
     snru: [],
     attnd: [],
@@ -19,13 +21,30 @@ const initialState = {
 
 
 const DataReducer = (state = initialState, action) => {
-    // console.log(state)
+    // console.log(state.lastShit)
 
     switch (action.type) {
 
         case DATAREQUEST_SUCCED:
             return {
                 ...state,
+                allShit: state.allShit.concat({
+                    isSucced:true,
+                    key: Math.random(),
+                    date:action.data.date,
+                    raw:action.data.raw,
+                    counter:action.data.counter,
+                    status:action.data.status
+                }),
+                lastShit: {
+                    isSucced:true,
+                    key: Math.random(),
+                    date:action.data.date,
+                    raw:action.data.raw,
+                    counter:action.data.counter,
+                    status:action.data.status,
+                    stats:action.data.stats
+                },
                 snrd: state.snrd.concat({
                     key: Math.random(),
                     y: action.data.stats.snrd,
@@ -92,7 +111,24 @@ const DataReducer = (state = initialState, action) => {
                 })
             };
 
-
+        case DATAREQUEST_FAILED:
+            return {
+                ...state,
+                allShit: state.allShit.concat({
+                    key: Math.random(),
+                    date:action.data.date,
+                    raw:action.data.raw,
+                    counter:action.data.counter,
+                    isSucced:false
+                }),
+                lastShit: {
+                    isSucced:false,
+                    key: Math.random(),
+                    date:action.data.date,
+                    raw:action.data.raw,
+                    counter:action.data.counter
+                },
+            }
         default:
             return state;
     }
